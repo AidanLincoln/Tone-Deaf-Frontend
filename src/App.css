@@ -34,6 +34,13 @@
 
 .navbar .navLink {
   width: fit-content;
+  text-decoration: none;
+  color: black;
+
+}
+
+.navbar .navLink:hover { 
+  font-size: xx-large;
 }
 
 html { 

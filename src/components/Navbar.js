@@ -46,7 +46,7 @@ export default class Navbar extends React.Component {
                 </NavLink>
 
                 {/* Only render if user is not logged in */}
-
+  
                 <NavLink
                 className="navLink"
                 to="/sign-in"
@@ -70,7 +70,7 @@ export default class Navbar extends React.Component {
                 </NavLink>
 
                 {/* Only render if user is logged in  */}
-
+        
                 <NavLink
                 className="navLink"
                 to="/my-chords"
@@ -84,12 +84,13 @@ export default class Navbar extends React.Component {
 
                 <NavLink
                 className="navLink"
-                to="/sign-out"
+                to="/"
                 exact
                 // style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
+                onClick={this.props.onSignOut}
                 >Sign-Out
                 </NavLink>
             </div>
