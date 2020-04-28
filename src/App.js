@@ -26,7 +26,7 @@ export default class App extends React.Component {
         user: {},
         errors: false
       },
-      scales: null
+      scales: []
     };
   }
   componentDidMount() {
