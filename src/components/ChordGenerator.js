@@ -65,6 +65,7 @@ export default class ChordGenerator extends React.Component {
                 let chord = []
                 const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#']
                 while(chord.length < this.state.numberOfNotes){
+                    ///make a 50/50 chance of starting on creating upper octave first?
                     if(chord.length < 4){
                         let randomIndex = Math.floor(Math.random() * notesInScale.length) 
                         let noteToAdd = notesInScale[randomIndex]
@@ -134,13 +135,17 @@ export default class ChordGenerator extends React.Component {
         polySynth.triggerAttackRelease(this.state.currentChord, "2.8");
     }
 
-    // handleSave = () => {
-    //     this.props.saveChord(this.state.currentChord, )
-    // }
+    handleSave = () => {
+        let octaveTwoConfigured = this.state.octaveTwoNotes.map(note => {
+            return `${note}2`
+        })
+        this.props.saveChord({octave_one: this.state.octaveOneNotes, octave_two: octaveTwoConfigured}, this.state.currentScale.scale_name)
+    }
 
     render(){
         return(
             <div>
+                <br></br><br></br>
                 <label>Scale</label>
                 <select id="chord-scale" onChange={(event) => this.onScaleChange(event)}>
                     <option value="Major">Major</option>

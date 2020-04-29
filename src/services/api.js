@@ -39,6 +39,18 @@ const createUser = (data) => {
     }).then(res => { return res.json()});
 };
 
+const getUsersChords = (id) => {
+    return fetch(`${API_ROOT}/profile/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token()
+        }
+    }).then(res => {return res.json()})
+    
+}
+
 const getScales = () => {
     return fetch(`${API_ROOT}/scales`)
     .then(res => {
@@ -58,7 +70,8 @@ const postNewChord = (obj) => {
         method: "POST",
         headers: {      
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
+        Authorization: token()
         },
         body: JSON.stringify(obj)
     }).then(res => {
@@ -76,7 +89,8 @@ export const api = {
     collections: {
         getScales,
         getNotesInCollection,
-        postNewChord
+        postNewChord,
+        getUsersChords
     }
 }
 

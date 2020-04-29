@@ -31,7 +31,7 @@ export default class App extends React.Component {
     let token = localStorage.getItem("token");
     if (token) {
       api.auth.getCurrentUser().then(user => {
-        this.setState({ auth: user });
+        this.setState({ auth: {user} });
       });
     }
     api.collections.getScales()
@@ -65,13 +65,14 @@ export default class App extends React.Component {
     });
   };
 
-  postChord = (noteArray, scaleName) => {
+  postChord = (notesObj, scaleName) => {
     let obj = {
       scale_name: scaleName,
       is_scale: false,
       user_id: this.state.auth.user.id,
-      notes: noteArray
+      notes: notesObj
     }
+    console.log(obj)
     api.collections.postNewChord(obj).then(res => {
       console.log(res)
     })
@@ -114,7 +115,7 @@ export default class App extends React.Component {
             <Route
               exact
               path="/my-chords"
-              render={ props => <MyChords {...props} />}/>
+              render={ props => <MyChords {...props} user={this.state.auth} />}/>
 
           </div>
           </Router>

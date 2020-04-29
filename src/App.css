@@ -36,12 +36,18 @@
   width: fit-content;
   text-decoration: none;
   color: black;
-
 }
 
-.navbar .navLink:hover { 
-  font-size: xx-large;
+.navbar .navHome {
+  left: 50px;
+  width: fit-content;
+  text-decoration: none;
+  color: black;
 }
+
+/* .navbar .navLink:hover { 
+  font-weight: bolder;
+} */
 
 html { 
   background-color: #ff8078;

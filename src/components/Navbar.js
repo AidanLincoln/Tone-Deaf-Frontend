@@ -4,19 +4,25 @@ import { NavLink } from 'react-router-dom';
 export default class Navbar extends React.Component {
     render(){
         const link = {
-        //   width: '100px',
-        //   padding: '12px',
-        //   margin: '0 6px 6px',
-        //   color: 'black',
+          padding: '2px',
+          margin: '0 6px 6px',
+          color: 'black',
         }
     
         return (
             <div className="navbar">
                 <NavLink
-                className="navLink"
+                className="navHome"
                 to="/"
                 exact
-                // style={link}
+                style={{
+                    position: "fixed",
+                    // left: "-400px",
+                    
+                    padding: '2px',
+                    margin: '0 6px 6px',
+                    color: 'black',
+                }}
                 // activeStyle={{
                 // background: "black"
                 // }}
@@ -27,7 +33,7 @@ export default class Navbar extends React.Component {
                 className="navLink"
                 to="/chord-generator"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 //   background: 'black'
                 // }}
@@ -38,7 +44,7 @@ export default class Navbar extends React.Component {
                 className="navLink"
                 to="/scales"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
@@ -46,53 +52,56 @@ export default class Navbar extends React.Component {
                 </NavLink>
 
                 {/* Only render if user is not logged in */}
-  
+                {!localStorage.getItem('token') ?
                 <NavLink
                 className="navLink"
                 to="/sign-in"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
                 >Sign-In
-                </NavLink>
+                </NavLink>:null}
 
+                {!localStorage.getItem('token') ?
                 <NavLink
                 className="navLink"
                 to="/create-account"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
                 >Create Account
-                </NavLink>
+                </NavLink>:null}
 
                 {/* Only render if user is logged in  */}
-        
+                {!!localStorage.getItem('token') ? 
                 <NavLink
                 className="navLink"
                 to="/my-chords"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
                 >My Chords
-                </NavLink>
-
+                </NavLink> : null}
+                
+                {!!localStorage.getItem('token') ?
                 <NavLink
                 className="navLink"
                 to="/"
                 exact
-                // style={link}
+                style={link}
                 // activeStyle={{
                 // background: "black"
                 // }}
                 onClick={this.props.onSignOut}
                 >Sign-Out
-                </NavLink>
+                </NavLink>: null}
+
             </div>
         )
     }
