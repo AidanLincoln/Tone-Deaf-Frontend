@@ -53,6 +53,20 @@ const getNotesInCollection = (id) => {
     })
 }
 
+const postNewChord = (obj) => {
+    return fetch(`${API_ROOT}/collections`,{
+        method: "POST",
+        headers: {      
+        "Content-Type": "application/json",
+        Accept: "application/json"
+        },
+        body: JSON.stringify(obj)
+    }).then(res => {
+        return res.json()
+    })
+    
+}
+
 export const api = {
     auth: {
       login,
@@ -61,7 +75,8 @@ export const api = {
     },
     collections: {
         getScales,
-        getNotesInCollection
+        getNotesInCollection,
+        postNewChord
     }
 }
 

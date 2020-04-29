@@ -16,8 +16,6 @@ import store from './redux/store'
 import {Provider} from 'react-redux'
 import {fetchUsers} from './redux'
 
-
-
 export default class App extends React.Component {
   constructor() {
     super();
@@ -43,28 +41,20 @@ export default class App extends React.Component {
         })
     })
   }
-  createUser = (event) => {
-    let newUser = {
-      username: event.target.username.value,
-      password: event.target.password.value
-    }
-    api.auth.createUser(newUser).then(res => {
-       if (res.error){
-        this.setState({errors: true})
-      } else {    
-        this.signIn(res);
-        this.setState({errors: false})
-      }
-    })
+
+  createUser = (res) => {
+    this.signIn(res)
   }
 
   signIn = (data) => {
     console.log(data)
-    let user = { user: {id: data.user.id,  username: data.user.username}};
-    localStorage.setItem("token", data.jwt);
-    this.setState({ 
+    if(data.hasOwnProperty('user')){
+      let user = { user: {id: data.user.id,  username: data.user.username}};
+      localStorage.setItem("token", data.jwt);
+      this.setState({ 
       auth: user
     });
+    }
   };
 
   signOut = () => {
@@ -74,6 +64,18 @@ export default class App extends React.Component {
       errors: null
     });
   };
+
+  postChord = (noteArray, scaleName) => {
+    let obj = {
+      scale_name: scaleName,
+      is_scale: false,
+      user_id: this.state.auth.user.id,
+      notes: noteArray
+    }
+    api.collections.postNewChord(obj).then(res => {
+      console.log(res)
+    })
+  }
 
   render(){
     return (
@@ -92,12 +94,12 @@ export default class App extends React.Component {
             <Route
               exact
               path="/create-account"
-              render={ props => <CreateAccount {...props} errors={this.state.errors} onCreateUser={this.createUser} />}/>
+              render={ props => <CreateAccount {...props} error={this.state.auth.errors} onCreateUser={this.createUser} />}/>
 
             <Route
               exact
               path="/chord-generator"
-              render={ props => <ChordGenerator {...props} allScales={this.state.scales}/>}/>
+              render={ props => <ChordGenerator {...props} saveChord={this.postChord} allScales={this.state.scales}/>}/>
 
             <Route
               exact

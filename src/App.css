@@ -55,3 +55,6 @@ html {
 .main {
   background-color: #ff8078;
 }
+.row {
+  height: 50px;
+}

@@ -18,7 +18,7 @@ export default class SignIn extends React.Component {
         event.preventDefault()
         api.auth.login(this.state.fields).then(res => {
             console.log(res)
-            if (!res.errors){
+            if (res.hasOwnProperty("user")){
                 console.log(res)
                 this.props.onSignIn(res);
                 this.props.history.push('/')
@@ -39,6 +39,7 @@ export default class SignIn extends React.Component {
         return(
             <div id="sign-in">
                 <h1>Sign-in</h1>
+                {!!this.state.errors ? <h3 style={{color: 'white'}}>Invalid username or password.</h3> : null}
                 <form id="sign-in-form" onSubmit={this.handleSubmit}>
                     <label>Username</label>
                     <br></br>

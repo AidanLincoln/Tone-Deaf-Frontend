@@ -1,17 +1,20 @@
 import React from 'react'
 import { api } from '../services/api'
 import { PolySynth, Synth } from 'tone'
+import Piano from './Piano'
 export default class ChordGenerator extends React.Component {
     constructor(){
         super()
-        // console.log(Tone)
         this.state = {
             scaleType: "Major",
             key: "C",
             numberOfNotes: 3,
             currentScale: null,
+            currentScaleNotes: null,
             currentChord: null,
-            hasBeenGenerated: false
+            hasBeenGenerated: false,
+            octaveOneNotes: [],
+            octaveTwoNotes: []
 
         }
     }
@@ -42,7 +45,9 @@ export default class ChordGenerator extends React.Component {
             }
         })
         this.setState({
-            currentScale: genScale
+            currentScale: genScale,
+            octaveOneNotes: [],
+            octaveTwoNotes: []
         },()=> {
             let notesInScale;
             let octaveTwo;
@@ -51,20 +56,21 @@ export default class ChordGenerator extends React.Component {
                 notesInScale = res.notes.map((note)=>{
                     return note.name
                 })
+                this.setState({
+                    currentScaleNotes: notesInScale
+                })
                 octaveTwo = res.notes.map((note)=>{
                     return note.name
                 })
                 let chord = []
                 const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#']
                 while(chord.length < this.state.numberOfNotes){
-                    //need to remove notes that are a semitone apart
-                    //if numofnotes > 5 add second octave
-                    //if numofnotes == 5, choose one note in upper octave
-                    //if numberOfNotes == 6, choose 2 notes in second octave. if 7, choose 3  
-                    if(chord.length <= 4){
-                        console.log(notesInScale)
+                    if(chord.length < 4){
                         let randomIndex = Math.floor(Math.random() * notesInScale.length) 
                         let noteToAdd = notesInScale[randomIndex]
+                        this.setState((prevState) => ({
+                            octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
+                        }))
                         chord.push(`${noteToAdd}3`)
                         if(notesInScale.includes(allNotes[allNotes.indexOf(noteToAdd)-1])){
                             notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(noteToAdd)-1]), 1)
@@ -72,11 +78,23 @@ export default class ChordGenerator extends React.Component {
                         if(notesInScale.includes(allNotes[allNotes.indexOf(noteToAdd)+1])){
                             notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
                         }
+                        //if note is a G#, it cant remove an A... Must force
+
+                        if(noteToAdd === "G#" && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(noteToAdd === "A" && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
+                        }
+                        
                         notesInScale.splice(notesInScale.indexOf(noteToAdd), 1)
                         
                     }else{
                         let randomIndexOc2 = Math.floor(Math.random() * octaveTwo.length) 
                         let noteToAdd = octaveTwo[randomIndexOc2]
+                        this.setState((prevState) => ({
+                            octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
+                        }))
                         chord.push(`${noteToAdd}4`)
                         if(octaveTwo.includes(allNotes[allNotes.indexOf(noteToAdd)-1])){
                             octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(noteToAdd)-1]), 1)
@@ -84,30 +102,41 @@ export default class ChordGenerator extends React.Component {
                         if(octaveTwo.includes(allNotes[allNotes.indexOf(octaveTwo[randomIndexOc2])+1])){
                             octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
                         }
+                        //force remove G# || A
+                        if(noteToAdd === "G#" && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(noteToAdd === "A" && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
+                        }
+
                         octaveTwo.splice(octaveTwo.indexOf(noteToAdd), 1)
-                    }
-                    
-                    // console.log(notesInScale)
-                    // console.log(octaveTwo)
-                    console.log(chord)  
-                    this.setState({
-                        currentChord: chord,
-                        hasBeenGenerated: true
-                    })                
-                }         
+                    }             
+                }  
+                console.log(chord) 
+                this.setState({
+                    currentChord: chord,
+                    hasBeenGenerated: true
+                })           
             })
         })
     }
+
     onPlay = (event) => {
         event.preventDefault()
-        console.log("helloo")
         const polySynth = new PolySynth({
+            polyphony: 8,
             volume : -7 ,
             detune : 0 ,
             voice : Synth
             }).toMaster();
+        console.log(`playing: ${this.state.currentChord}`)
         polySynth.triggerAttackRelease(this.state.currentChord, "2.8");
     }
+
+    // handleSave = () => {
+    //     this.props.saveChord(this.state.currentChord, )
+    // }
 
     render(){
         return(
@@ -143,11 +172,14 @@ export default class ChordGenerator extends React.Component {
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                    <option value="8">8</option>
                 </select><br></br><br></br>
 
                 <button onClick={this.onGenerate}>Generate</button>
                 {!!this.state.hasBeenGenerated ? <button onClick={this.onPlay}>Play</button>: null}
+                {!!this.state.hasBeenGenerated ? <button onClick={this.handleSave}>Save</button>: null}
+
+                <br></br><br></br>
+                {!!this.state.hasBeenGenerated ? <Piano octaveOne={this.state.octaveOneNotes} octaveTwo={this.state.octaveTwoNotes} scaleKey={this.state.key}></Piano>: null}
             </div>
         )
     }
