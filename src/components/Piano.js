@@ -68,14 +68,14 @@ export default class Piano extends React.Component {
 
     render(){
         return(
-            <div>
+            <div style={{marginTop: "-15px"}}>
                 {this.props.octaveTwo.length > 0 ?  
-                <div className="row" style={{padding: "20px"}}>
+                <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
                     <div className="col-6">
                         <div className="row">
                             {this.mapScaleToKeys()}
                         </div>
-                        <div className="row" style={{marginTop: "20px"}}>
+                        <div className="row" style={{marginTop: "0px"}}>
                             {this.mapActiveKeys(this.props.octaveOne)}
                         </div>
                     </div>
@@ -83,16 +83,16 @@ export default class Piano extends React.Component {
                         <div className="row">
                             {this.mapScaleToKeys()}
                         </div>
-                        <div className="row" style={{marginTop: "20px"}}>
+                        <div className="row" style={{marginTop: "0px"}}>
                             {this.mapActiveKeys(this.props.octaveTwo)}
                         </div>
                     </div>
                 </div> : 
                 <div>
-                    <div className="row" style={{padding: "20px"}}>
+                    <div className="row" style={{paddingLeft: "180px", paddingRight: "180px", marginTop: "40px"}}>
                         {this.mapScaleToKeys()}
                     </div>
-                    <div className="row" style={{marginTop: "20px", padding: "20px"}}>
+                    <div className="row" style={{paddingLeft: "180px", paddingRight: "180px"}}>
                         {this.mapActiveKeys(this.props.octaveOne)}
                     </div>
                 </div>}

@@ -16,9 +16,8 @@ export default class Navbar extends React.Component {
                 to="/"
                 exact
                 style={{
-                    position: "fixed",
-                    // left: "-400px",
-                    
+                    position: 'relative',
+                    left: "-700px",
                     padding: '2px',
                     margin: '0 6px 6px',
                     color: 'black',
@@ -35,7 +34,7 @@ export default class Navbar extends React.Component {
                 exact
                 style={link}
                 // activeStyle={{
-                //   background: 'black'
+                  
                 // }}
                 >Chord Generator
                 </NavLink>

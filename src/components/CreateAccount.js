@@ -37,25 +37,38 @@ export default class CreateAccount extends React.Component {
         // }
     }
 
-    
+    handleRedirect = () => {
+        this.props.history.push('/sign-in')
+    }
 
     render(){
         return (
             
             <div id="create-account">
-                <h1>Create an Account</h1>
                 {!!this.state.error ? <h3 style={{color: 'white'}}>This username has already been taken.</h3> : null}
-                <form id="create-account-form" onSubmit={this.handleSubmit}>
-                    <label>Username</label>
-                    <br></br>
-                    <input type='text' placeholder='username' name='username'/><br></br><br></br>
-                    <label>Password</label>
-                    <br></br>
-                    <input type='password' placeholder='password' name='password'/><br></br>
-                    <br></br>
-                    <br></br>
-                    <input type="submit"></input>
-                </form>
+                <br></br><br></br>
+                <br></br><br></br>
+                <div className="accountForm">
+                    <h1 className="formHeader">Create an Account</h1>
+                    <form id="create-account-form" onSubmit={this.handleSubmit}>
+                        <label className='formLabel'>Username</label>
+                        <br></br>
+                        <input className='formInput' type='text' placeholder='username' name='username'/><br></br><br></br>
+                        <label className='formLabel' >Password</label>
+                        <br></br>
+                        <input className='formInput' type='password' placeholder='password' name='password'/><br></br>
+                        <br></br>
+                        <input className={"niceButton"} type="submit" value="Create account"></input>
+                        <br></br>
+                        <br></br>
+                    </form>
+                </div>
+                <br></br>
+                <span className="accountSpan" style={{paddingLeft: "10px", paddingRight: "10px"}}>Already have an account?</span>
+                <br></br>
+                <div className="seperationLine"></div>         
+                <br></br>
+                <button className="niceButton" onClick={this.handleRedirect}>Sign-in</button>
             </div>
         )
     }

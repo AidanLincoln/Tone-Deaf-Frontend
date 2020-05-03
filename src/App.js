@@ -4,13 +4,13 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { api } from './services/api'
 
 import Navbar from './components/Navbar'
-import Piano from './components/Piano'
 import SignIn from './components/SignIn'
 import CreateAccount from './components/CreateAccount'
 import ChordGenerator from './components/ChordGenerator'
 import Home from './components/Home'
 import Scales from './components/Scales'
 import MyChords from './components/MyChords'
+import ChordProgressions from './components/ChordProgressions'
 
 import store from './redux/store'
 import {Provider} from 'react-redux'
@@ -94,13 +94,18 @@ export default class App extends React.Component {
 
             <Route
               exact
+              path="/my_progressions"
+              render={ props => <ChordProgressions {...props} user={this.state.auth.user}/>}/>
+
+            <Route
+              exact
               path="/create-account"
               render={ props => <CreateAccount {...props} error={this.state.auth.errors} onCreateUser={this.createUser} />}/>
 
             <Route
               exact
               path="/chord-generator"
-              render={ props => <ChordGenerator {...props} saveChord={this.postChord} allScales={this.state.scales}/>}/>
+              render={ props => <ChordGenerator {...props} user={this.state.auth.user} saveChord={this.postChord} allScales={this.state.scales}/>}/>
 
             <Route
               exact

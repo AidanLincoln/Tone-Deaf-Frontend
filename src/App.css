@@ -39,7 +39,8 @@
 }
 
 .navbar .navHome {
-  left: 50px;
+  position: relative;
+  /* left: 50px; */
   width: fit-content;
   text-decoration: none;
   color: black;
@@ -50,17 +51,113 @@
 } */
 
 html { 
-  background-color: #ff8078;
+  /* background-color: #ff8078; */
+  background-color: #ff7b7b;
 }
 
 .scaleColumn{
   background-color: #ff5757;
-  
+  padding: 40px;
+  font-size: x-large;
 }
 
 .main {
-  background-color: #ff8078;
+  background-color: #ff7b7b;
 }
 .row {
-  height: 50px;
+  height: 180px;
+}
+.niceButton {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: white;
+  background-color: #ff5757;
+  text-align:center;
+  transition: all 0.2s;
+}
+.niceButton:hover{
+  color:#000000;
+  background-color: #FFFFFF;
+}
+.myChords{
+  background-color: #ff5757;
+  margin-top: 50px;
+  margin-left: 50px;
+  margin-right: 90px;
+}
+.textBackground{
+  background-color: #ff7b7b;
+  border: 2px solid white;
+  padding: 5px;
+}
+.accountForm{
+  margin: 0 auto;
+  background-color: white;
+  border: 10px solid #ff5757;
+  width: 650px;
+}
+
+.formLabel{
+  font-size: x-large;
+}
+
+.formInput{
+  border: 7px solid #ff5757;
+  padding: 4px;
+  width: 225px;
+}
+
+.formHeader{
+  padding-bottom: 15px;
+}
+
+.formSelect{
+  width: 20%;
+  height: 30px;
+  font-size: 100%;
+  /* font-weight: bold; */
+  border-radius: 0;
+  background-color: #ff5757;
+  border: 2px solid white;
+  border-right: 2px solid #c0392b;
+  border-bottom: 2px solid #c0392b;
+  color: white;
+  /* appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+  /* Adding transition effect */
+  transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.formSelect:hover,
+.formSelect:focus {
+  color: #c0392b;
+  background-color: white;
+  border-bottom-color: #DCDCDC;
+  border-right-color: #DCDCDC;
+}
+.accountSpan {
+  background-color: white;
+  padding: 4px;
+}
+.seperationLine {
+  background-color: white;
+  height: 2px;
+  width: 500px;
+  position: relative;
+  margin: auto;
+  top: 12px;
+}
+.chordParamDiv{
+  background-color: #ff7b7b;
+  border: 5px solid #ff5757;
+  height: 100px;
+  padding: 5px;
 }

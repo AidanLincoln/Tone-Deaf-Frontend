@@ -77,7 +77,35 @@ const postNewChord = (obj) => {
     }).then(res => {
         return res.json()
     })
-    
+}
+const destroyChord = (id) => {
+    return fetch(`${API_ROOT}/collections/${id}`, {
+        method: "DELETE",
+        headers: {      
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token()
+        }
+    }).then(res => {
+        return res.json()
+    })
+}
+
+const addChordToProgression = (id, progressionNum) => {
+    return fetch(`${API_ROOT}/collections/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token()
+        },
+        body: JSON.stringify({
+            chord_progression: progressionNum
+        })
+        // .then(res => {
+        //     return res.json()
+        // })
+    })
 }
 
 export const api = {
@@ -90,7 +118,9 @@ export const api = {
         getScales,
         getNotesInCollection,
         postNewChord,
-        getUsersChords
+        getUsersChords,
+        destroyChord,
+        addChordToProgression
     }
 }
 

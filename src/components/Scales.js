@@ -27,7 +27,7 @@ export default class Scales extends React.Component {
             }
         })
         return majorScales.map(scale => {
-            return <li style={{listStyleType: "none"}}>{scale.scale_name}</li>
+            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
         })
     }
     renderMinorScales = () => {
@@ -37,7 +37,7 @@ export default class Scales extends React.Component {
             }
         })
         return minorScales.map(scale => {
-            return <li style={{listStyleType: "none"}}>{scale.scale_name}</li>
+            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
         })
     }
     renderMajorPentatonicScales = () => {
@@ -47,7 +47,7 @@ export default class Scales extends React.Component {
             }
         })
         return majorPentatonicScales.map(scale => {
-            return <li style={{listStyleType: "none"}}>{scale.scale_name}</li>
+            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
         })
     }
     renderMinorPentatonicScales = () => {
@@ -57,30 +57,37 @@ export default class Scales extends React.Component {
             }
         })
         return minorPentatonicScales.map(scale => {
-            return <li style={{listStyleType: "none"}}>{scale.scale_name}</li>
+            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
         })
     }
 
     render(){
         return(
-            <div className="row" style={{paddingTop: "20px", paddingBottom: "20px"}}>
-                <div className="col-3 scaleColumn">
+            <div className="row" style={{padding: "30px"}}>
+                <div className="col-3">
                     <h3>Major</h3>
-                    {this.renderMajorScales()}
+                    <div className="scaleColumn">
+                        {this.renderMajorScales()}
+                    </div>
                 </div>
-                <div className="col-3 scaleColumn">
+                <div className="col-3">
                     <h3>Minor</h3>
-                    {this.renderMinorScales()}
+                    <div className="scaleColumn">
+                        {this.renderMinorScales()}
+                    </div>
                 </div>
-                <div className="col-3 scaleColumn">
+                <div className="col-3">
                     <h3>Major Pentatonic</h3>
-                    <ul>
-                    {this.renderMajorPentatonicScales()}
-                    </ul>
+                    <div className="scaleColumn">
+                        {this.renderMajorPentatonicScales()}
+                    </div>
+                    
                 </div>
-                <div className="col-3 scaleColumn">
+                <div className="col-3">
                     <h3>Minor Pentatonic</h3>
-                    {this.renderMinorPentatonicScales()}
+                    <div className="scaleColumn">
+                        {this.renderMinorPentatonicScales()}
+                    </div>
                 </div>
             </div>
         )

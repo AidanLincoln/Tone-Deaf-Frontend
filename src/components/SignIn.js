@@ -34,23 +34,37 @@ export default class SignIn extends React.Component {
                 fields: newFields
         })      
     }
+    
+    handleRedirect = () => {
+        this.props.history.push('/create-account')
+    }
 
     render(){
         return(
             <div id="sign-in">
-                <h1>Sign-in</h1>
                 {!!this.state.errors ? <h3 style={{color: 'white'}}>Invalid username or password.</h3> : null}
-                <form id="sign-in-form" onSubmit={this.handleSubmit}>
-                    <label>Username</label>
-                    <br></br>
-                    <input type='text' placeholder='username' name='username' onChange={this.handleChange}/><br></br><br></br>
-                    <label>Password</label>
-                    <br></br>
-                    <input type='password' placeholder='password' name='password' onChange={this.handleChange}/><br></br>
-                    <br></br>
-                    <br></br>
-                    <input type="submit"></input>
-                </form>
+                <br></br><br></br>
+                <br></br><br></br>
+                <div className="accountForm">
+                    <h1 className="formHeader">Sign-in</h1>
+                    <form id="sign-in-form" onSubmit={this.handleSubmit}>
+                        <label className="formLabel">Username</label>
+                        <br></br>
+                        <input className="formInput" type='text' placeholder='username' name='username' onChange={this.handleChange}/><br></br><br></br>
+                        <label className="formLabel">Password</label>
+                        <br></br>
+                        <input className="formInput" type='password' placeholder='password' name='password' onChange={this.handleChange}/><br></br>
+                        <br></br>
+                        <input className={"niceButton"} type="submit" value="Sign-in"></input>
+                        <br></br><br></br>
+                    </form>
+                </div>
+                <br></br>
+                <span className="accountSpan" style={{paddingLeft: "10px", paddingRight: "10px"}}>New to Tone Deaf?</span>
+                <br></br>
+                <div className="seperationLine"></div>         
+                <br></br>
+                <button className="niceButton" onClick={this.handleRedirect}>Create an account</button>
             </div>
         )
     }
