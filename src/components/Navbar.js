@@ -10,23 +10,29 @@ export default class Navbar extends React.Component {
         }
     
         return (
-            <div className="navbar">
+            <div>
                 <NavLink
                 className="navHome"
                 to="/"
                 exact
                 style={{
-                    position: 'relative',
-                    left: "-700px",
+                    position: 'absolute',
+                    left: "50px",
                     padding: '2px',
                     margin: '0 6px 6px',
                     color: 'black',
+                    float: 'left',
+                    paddingTop: '30px',
+                    textDecoration: "none"
                 }}
                 // activeStyle={{
                 // background: "black"
                 // }}
                 >Tone Deaf
                 </NavLink>
+
+            <div className="navbar">
+                
 
                 <NavLink
                 className="navLink"
@@ -87,6 +93,18 @@ export default class Navbar extends React.Component {
                 // }}
                 >My Chords
                 </NavLink> : null}
+
+                {!!localStorage.getItem('token') ? 
+                <NavLink
+                className="navLink"
+                to="/chord-progressions"
+                exact
+                style={link}
+                // activeStyle={{
+                // background: "black"
+                // }}
+                >Chord Progressions
+                </NavLink> : null}
                 
                 {!!localStorage.getItem('token') ?
                 <NavLink
@@ -100,7 +118,7 @@ export default class Navbar extends React.Component {
                 onClick={this.props.onSignOut}
                 >Sign-Out
                 </NavLink>: null}
-
+            </div>
             </div>
         )
     }

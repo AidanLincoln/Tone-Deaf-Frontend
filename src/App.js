@@ -24,14 +24,17 @@ export default class App extends React.Component {
         user: {},
         errors: false
       },
-      scales: []
+      scales: [],
+      usersChords: null
     };
   }
   componentDidMount() {
     let token = localStorage.getItem("token");
     if (token) {
       api.auth.getCurrentUser().then(user => {
-        this.setState({ auth: {user} });
+        this.setState({ auth: {user} }, () => {
+          this.updateUsersChords()
+        });
       });
     }
     api.collections.getScales()
@@ -40,6 +43,31 @@ export default class App extends React.Component {
             scales: data
         })
     })
+  }
+
+  // componentDidUpdate(){
+  //   if(!!localStorage.getItem("token") && this.state.usersChords === null){
+  //     api.auth.getCurrentUser().then(user => {
+  //       this.updateUsersChords()
+  //     });
+      
+  //   } 
+  // }
+
+  updateUsersChords = () => {
+    if(!!this.state.auth.user){
+      api.collections.getUsersChords(this.state.auth.user.id).then((res) => {
+        console.log(res.collections)
+        // let sortedCollections = res.collections.sort((a,b) => {
+        //   return a.collection_info.id - b.collection_info.id
+        // })
+        this.setState({
+            usersChords: res.collections
+        })
+        console.log('chordsDidUpdate')
+        console.log(res)
+      })
+    }
   }
 
   createUser = (res) => {
@@ -53,7 +81,7 @@ export default class App extends React.Component {
       localStorage.setItem("token", data.jwt);
       this.setState({ 
       auth: user
-    });
+      });
     }
   };
 
@@ -61,7 +89,8 @@ export default class App extends React.Component {
     localStorage.removeItem("token");
     this.setState({
       auth: { user: {} },
-      errors: null
+      errors: null,
+      usersChords: null
     });
   };
 
@@ -77,6 +106,50 @@ export default class App extends React.Component {
       console.log(res)
     })
   }
+
+  sortNotes = (notes) => {
+    let notePlacementObj = {
+        'A': 1,
+        'A#': 2,
+        'B': 3,
+        'C': 4,
+        'C#': 5,
+        'D': 6,
+        'D#': 7,
+        'E': 8,
+        'F': 9,
+        'F#': 10,
+        'G': 11,
+        'G#': 12,
+        'A2': 13,
+        'A#2': 14,
+        'B2': 15,
+        'C2': 16,
+        'C#2': 17,
+        'D2': 18,
+        'D#2': 19,
+        'E2': 20,
+        'F2': 21,
+        'F#2': 22,
+        'G2': 23,
+        'G#2': 24
+    }
+    let noteNums = notes.map(note => {
+        return notePlacementObj[note]
+    })
+    noteNums.sort((a,b) => {
+        return a - b
+    })
+    let sortedNotes = []
+    noteNums.forEach(num => {
+        for(let key in notePlacementObj){
+            if(notePlacementObj[key] === num){
+                sortedNotes.push(` ${key}`)
+            }
+        }
+    })
+    return sortedNotes
+  } 
 
   render(){
     return (
@@ -94,8 +167,8 @@ export default class App extends React.Component {
 
             <Route
               exact
-              path="/my_progressions"
-              render={ props => <ChordProgressions {...props} user={this.state.auth.user}/>}/>
+              path="/chord-progressions"
+              render={ props => <ChordProgressions {...props} key={"CPKey"} sortNotes={this.sortNotes} updateUsersChords={this.updateUsersChords} usersChords={this.state.usersChords} user={this.state.auth.user}/>}/>
 
             <Route
               exact
@@ -120,7 +193,7 @@ export default class App extends React.Component {
             <Route
               exact
               path="/my-chords"
-              render={ props => <MyChords {...props} user={this.state.auth} />}/>
+              render={ props => <MyChords {...props} updateUsersChords={this.updateUsersChords} sortNotes={this.sortNotes} usersChords={this.state.usersChords} user={this.state.auth} />}/>
 
           </div>
           </Router>

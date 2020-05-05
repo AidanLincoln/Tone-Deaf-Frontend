@@ -65,26 +65,26 @@ export default class Scales extends React.Component {
         return(
             <div className="row" style={{padding: "30px"}}>
                 <div className="col-3">
-                    <h3>Major</h3>
+                    <h2>Major</h2>
                     <div className="scaleColumn">
                         {this.renderMajorScales()}
                     </div>
                 </div>
                 <div className="col-3">
-                    <h3>Minor</h3>
+                    <h2>Minor</h2>
                     <div className="scaleColumn">
                         {this.renderMinorScales()}
                     </div>
                 </div>
                 <div className="col-3">
-                    <h3>Major Pentatonic</h3>
+                    <h2>Major Pentatonic</h2>
                     <div className="scaleColumn">
                         {this.renderMajorPentatonicScales()}
                     </div>
                     
                 </div>
                 <div className="col-3">
-                    <h3>Minor Pentatonic</h3>
+                    <h2>Minor Pentatonic</h2>
                     <div className="scaleColumn">
                         {this.renderMinorPentatonicScales()}
                     </div>

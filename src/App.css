@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* .App-header {
@@ -38,7 +39,7 @@
   color: black;
 }
 
-.navbar .navHome {
+.navHome {
   position: relative;
   /* left: 50px; */
   width: fit-content;
@@ -46,9 +47,13 @@
   color: black;
 }
 
-/* .navbar .navLink:hover { 
+.navbar .navLink:hover { 
   font-weight: bolder;
-} */
+}
+.navHome:hover { 
+  font-weight: bolder;
+  text-decoration: none;
+}
 
 html { 
   /* background-color: #ff8078; */
@@ -57,7 +62,12 @@ html {
 
 .scaleColumn{
   background-color: #ff5757;
-  padding: 40px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.4),
+              10px 10px rgba(46, 46, 46, 0.3),
+              15px 15px rgba(70, 69, 69, 0.2),
+              20px 20px rgba(100, 100, 100, 0.1),
+              25px 25px rgba(129, 129, 129, 0.05);
+  padding: 30px;
   font-size: x-large;
 }
 
@@ -81,6 +91,7 @@ html {
   background-color: #ff5757;
   text-align:center;
   transition: all 0.2s;
+  font-family: 'Montserrat', sans-serif;
 }
 .niceButton:hover{
   color:#000000;
@@ -88,6 +99,11 @@ html {
 }
 .myChords{
   background-color: #ff5757;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.4),
+              10px 10px rgba(46, 46, 46, 0.3),
+              15px 15px rgba(70, 69, 69, 0.2),
+              20px 20px rgba(100, 100, 100, 0.1),
+              25px 25px rgba(129, 129, 129, 0.05);
   margin-top: 50px;
   margin-left: 50px;
   margin-right: 90px;
@@ -160,4 +176,21 @@ html {
   border: 5px solid #ff5757;
   height: 100px;
   padding: 5px;
+}
+
+.chordLi{
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.4),
+              10px 10px rgba(46, 46, 46, 0.3),
+              15px 15px rgba(70, 69, 69, 0.2),
+              20px 20px rgba(100, 100, 100, 0.1),
+              25px 25px rgba(129, 129, 129, 0.05);
+  list-style-type: none;
+  background-color: #ff5757;
+  height: 130px;
+  width: 600px;
+  margin: auto;
+  padding-Top: 10px;
+  padding-bottom: 15px;
+  margin-bottom: 22px;
+
 }
