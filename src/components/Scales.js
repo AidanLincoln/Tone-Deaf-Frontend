@@ -1,5 +1,4 @@
 import React from 'react'
-import {api} from '../services/api'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
@@ -19,48 +18,50 @@ export default class Scales extends React.Component {
     }
 
     renderMajorScales = () => {
-        // console.log(this.props.allScales)
         let majorScales = this.props.allScales.filter((scale) => {
             if(scale.scale_name.includes("Major") && !scale.scale_name.includes("Pentatonic")){
                 return scale
             }
         })
-        return majorScales.map(scale => {
+        return majorScales.map((scale, index) => {
             let url = scale.scale_name.split(' ').join('_')
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
+
     renderMinorScales = () => {
         let minorScales = this.props.allScales.filter((scale) => {
             if(scale.scale_name.includes("Minor") && !scale.scale_name.includes("Pentatonic")){
                 return scale
             }
         })
-        return minorScales.map(scale => {
+        return minorScales.map((scale, index) => {
             let url = scale.scale_name.split(' ').join('_')
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
+
     renderMajorPentatonicScales = () => {
         let majorPentatonicScales = this.props.allScales.filter((scale) => {
             if(scale.scale_name.includes("Major") && scale.scale_name.includes("Pentatonic")){
                 return scale
             }
         })
-        return majorPentatonicScales.map(scale => {
+        return majorPentatonicScales.map((scale, index) => {
             let url = scale.scale_name.split(' ').join('_')
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", marginTop: "5px", marginBottom: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", marginTop: "5px", marginBottom: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
+    
     renderMinorPentatonicScales = () => {
         let minorPentatonicScales = this.props.allScales.filter((scale) => {
             if(scale.scale_name.includes("Minor") && scale.scale_name.includes("Pentatonic")){
@@ -68,12 +69,12 @@ export default class Scales extends React.Component {
             }
         })
         
-        return minorPentatonicScales.map(scale => {
+        return minorPentatonicScales.map((scale, index) => {
             let url = scale.scale_name.split(' ').join('_')
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
 

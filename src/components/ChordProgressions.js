@@ -24,14 +24,13 @@ export default class ChordProgressions extends React.Component {
             let chordsInProgression = this.props.usersChords.filter((chord) => {
                 return chord.collection_info.chord_progression === this.state.currentProgression
             })
-            console.log(chordsInProgression)
             if(chordsInProgression.length > 0){
-                return chordsInProgression.map(chord => {
+                return chordsInProgression.map((chord, index) => {
                     let notesInChord = chord.collection_notes.map(note => {
                         return note.name
                     })
                     let notesToDisplay = this.props.sortNotes(notesInChord).join(', ')
-                    return <li className="chordLi">
+                    return <li className="chordLi" key={index}>
                         <h4>Scale: {chord.collection_info.scale_name}</h4>
                         <h4>Notes: {notesToDisplay}</h4>
                         <button className="niceButton" onClick={(event) => this.playChord(notesInChord)}>Play</button>
@@ -64,6 +63,7 @@ export default class ChordProgressions extends React.Component {
     removeFromProgression = (collectionId) => {
         api.collections.addChordToProgression(collectionId, null)
         .then((res) => {
+            console.log("Chord removed from progression")
             console.log(res)
         })
         .then(() => {
@@ -93,7 +93,6 @@ export default class ChordProgressions extends React.Component {
                 })
                 chordsNotesArray.push(notes)
             })
-            console.log(chordsNotesArray)
             chordsNotesArray.forEach((noteSet, i) => {      
                 setTimeout(() => {
                     polySynth.triggerAttackRelease(noteSet, '2.5');

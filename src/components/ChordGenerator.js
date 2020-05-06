@@ -59,7 +59,6 @@ export default class ChordGenerator extends React.Component {
                 notesInScale = res.notes.map((note)=>{
                     return note.name
                 })
-                //static notes wont console.log??
                 staticNotesInScale = res.notes.map((note)=>{
                     return note.name
                 })
@@ -69,9 +68,6 @@ export default class ChordGenerator extends React.Component {
                 octaveTwo = res.notes.map((note)=>{
                     return note.name
                 })
-                // octaveTwo = res.notes.map((note)=>{
-                //     return note.name
-                // })
                 let chord = []
                 const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#']
                 while(chord.length < this.state.numberOfNotes){
@@ -89,47 +85,31 @@ export default class ChordGenerator extends React.Component {
                         if(notesInScale.includes(allNotes[allNotes.indexOf(noteToAdd)+1])){
                             notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
                         }
-                        //if note is a G#, it cant remove an A... Must force
-                        // if(indexOf(noteToAdd) === notesInScale.length + 1 
-                        //     && notesInScale[0] === allNotes[allNotes.indexOf(noteToAdd) + 1]){
-                        //         notesInScale.splice(0, 1)
-                        // }
-                        // if(indexOf(noteToAdd) === notesInScale.length + 1 && notesInScale[0] === allNotes[0]){
-                        //     notesInScale.splice(0,1)
-                        // }
-                        
-
                         if(noteToAdd === "G#" && notesInScale.includes("A")){
                             notesInScale.splice(notesInScale.indexOf("A"), 1)
                         }
                         if(noteToAdd === "A" && notesInScale.includes("G#")){
                             notesInScale.splice(notesInScale.indexOf("G#"), 1)
-                        }
-                        
+                        }      
+                        if(noteToAdd === "G#" && octaveTwo.includes("A")){
+                            octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                        }    
+                        if(noteToAdd === "A#" && octaveTwo.includes("B")){
+                            octaveTwo.splice(octaveTwo.indexOf("B"), 1)
+                        }      
                         notesInScale.splice(notesInScale.indexOf(noteToAdd), 1)
-                        console.log(`notesinscale: ${notesInScale}`)
-                        
                     }else{
                         let randomIndexOc2 = Math.floor(Math.random() * octaveTwo.length) 
-                        console.log(`static: ${staticNotesInScale}`)
-                        console.log(`oct2 ${octaveTwo}`)
-
-
                         if(chord.includes(`${staticNotesInScale[staticNotesInScale.length -1]}3`)){
                             let lastNote = staticNotesInScale[staticNotesInScale.length -1]
-                            console.log(`includes last note:${lastNote}`)
                             if(staticNotesInScale[0] === allNotes[allNotes.indexOf(lastNote)+1]){
                                 if(octaveTwo.includes(staticNotesInScale[0])){
                                     octaveTwo.splice(0, 1)
-                                    console.log("first removed")
                                     randomIndexOc2 = Math.floor(Math.random() * octaveTwo.length)
                                 }
                             }
                         }
-
-
                         let noteToAdd = octaveTwo[randomIndexOc2]
-                        console.log(` note to add :${noteToAdd}`)
                         this.setState((prevState) => ({
                             octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
                         }))
@@ -140,15 +120,12 @@ export default class ChordGenerator extends React.Component {
                         if(octaveTwo.includes(allNotes[allNotes.indexOf(octaveTwo[randomIndexOc2])+1])){
                             octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
                         }
-                        //force remove G# || A
-                        // fix: if chord contains last item of staticNotesinScale and the first item in staticNotes is a semitone away from the last, remove the first item
                         if(noteToAdd === "G#" && octaveTwo.includes("A")){
                             octaveTwo.splice(octaveTwo.indexOf("A"), 1)
                         }
                         if(noteToAdd === "A" && octaveTwo.includes("G#")){
                             octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
                         }
-
                         octaveTwo.splice(octaveTwo.indexOf(noteToAdd), 1)
                     }             
                 }  
@@ -185,7 +162,6 @@ export default class ChordGenerator extends React.Component {
                 this.props.saveChord({octave_one: this.state.octaveOneNotes, octave_two: octaveTwoConfigured}, this.state.currentScale.scale_name)
             })
         }
-        
     }
 
     render(){

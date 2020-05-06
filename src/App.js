@@ -45,7 +45,6 @@ export default class App extends React.Component {
   updateUsersChords = () => {
     if(!!this.state.auth.user){
       api.collections.getUsersChords(this.state.auth.user.id).then((res) => {
-        console.log(res.collections)
         if(res.collections !== undefined){
           let sortedCollections = res.collections.sort((a,b) => {
             return b.collection_info.id - a.collection_info.id

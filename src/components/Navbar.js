@@ -32,8 +32,6 @@ export default class Navbar extends React.Component {
                 </NavLink>
 
             <div className="navbar">
-                
-
                 <NavLink
                 className="navLink"
                 to="/chord-generator"

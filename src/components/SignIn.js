@@ -17,9 +17,7 @@ export default class SignIn extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
         api.auth.login(this.state.fields).then(res => {
-            console.log(res)
             if (res.hasOwnProperty("user")){
-                console.log(res)
                 this.props.onSignIn(res);
                 this.props.history.push('/')
             } else {
@@ -68,5 +66,4 @@ export default class SignIn extends React.Component {
             </div>
         )
     }
-
 }

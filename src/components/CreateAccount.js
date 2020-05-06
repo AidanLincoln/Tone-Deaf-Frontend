@@ -5,34 +5,24 @@ export default class CreateAccount extends React.Component {
     state = {
         error: false
     }
+
     handleSubmit = (event) => {
         event.preventDefault();
-
         let newUser = {
             username: event.target.username.value,
             password: event.target.password.value
-          }
-          api.auth.createUser(newUser).then(res => {
-             if (res.hasOwnProperty("user")){
-                 console.log(res)
-                this.setState({error: false})
-              this.props.onCreateUser(res);
-              this.props.history.push('/')
-
+        }
+        api.auth.createUser(newUser).then(res => {
+            if (res.hasOwnProperty("user")){
+                console.log("User succesfully created")
+                console.log(res)
+            this.setState({error: false})
+            this.props.onCreateUser(res);
+            this.props.history.push('/')
             } else {    
                 this.setState({error: true})
             }
-          })
-
-
-
-        // this.props.onCreateUser(event);
-        // event.target.username.value = ''
-        // event.target.password.value = ''
-        // console.log(this.props.error)
-        // if(!this.props.error){
-        //     this.props.history.push('/')
-        // }
+        })
     }
 
     handleRedirect = () => {
@@ -40,8 +30,7 @@ export default class CreateAccount extends React.Component {
     }
 
     render(){
-        return (
-            
+        return (     
             <div id="create-account">
                 {!!this.state.error ? <h3 style={{color: 'white'}}>This username has already been taken.</h3> : null}
                 <br></br><br></br>

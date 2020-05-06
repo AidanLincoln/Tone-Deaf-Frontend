@@ -34,12 +34,14 @@ export default class Piano extends React.Component {
             'G': 'white',
             'G#': 'black'
         }   
-        return this.orderKeys().map(note => {
+        return this.orderKeys().map((note, index) => {
             return <div className="col-1"
-                style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white"}}>{note}
+                style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white"}}
+                key={index}>{note}
             </div>
         })
     }
+    
     mapActiveKeys = (octave) => {
         let keyPressed = {
             'A': false,
@@ -58,10 +60,10 @@ export default class Piano extends React.Component {
         octave.forEach((note) => {
             keyPressed[note] = true
         })
-        return this.orderKeys().map((note) => {
+        return this.orderKeys().map((note, index) => {
             return <div className="col-1"
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: keyPressed[note] === false ? "0.5" : "1"}}>
-
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: keyPressed[note] === false ? "0.5" : "1"}}
+            key={index}>
             </div>
         })
     }

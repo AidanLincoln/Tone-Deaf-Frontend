@@ -12,11 +12,15 @@ export default class ScaleDetails extends React.Component {
             scaleNotes: null
         }
     }
+
     componentDidMount(){
+        this.getScaleData()
+    }
+    
+    getScaleData = () => {
+        console.log("Finding scale and fetching notes...")
         if(!!this.props.allScales){
             let scale = this.findScale()
-            console.log("remount")
-            console.log(scale)
             if(!!scale[0]){
                 api.collections.getNotesInCollection(scale[0].id).then((res) => {
                     let notes = res.notes.map((note) => {
@@ -27,20 +31,21 @@ export default class ScaleDetails extends React.Component {
                         currentScale: res.collection,
                         scaleNotes: notes
                     })
-                    console.log(res)
                 })
             }   
         }
     }
 
+    componentWillReceiveProps(props){
+        this.getScaleData()
+    }
+
     findScale = () => {
-        console.log('findscale')
         return this.props.allScales.filter((scale) => {
             let urlParams = this.props.match.params.scale_name
             if(urlParams[1] === '♯'){
                 urlParams = urlParams.replace('♯', '#')
             }
-            console.log(urlParams)
             return scale.scale_name === urlParams.split('_').join(' ')
         })
     }
@@ -57,11 +62,6 @@ export default class ScaleDetails extends React.Component {
                 assignedNotes.push(`${this.state.scaleNotes[i]}4`)
             }
         }
-        // let assignedNotes2 = this.props.sortNotes(assignedNotes).map(note => {
-        //     return note.substr(1);
-        // })
-        // console.log(assignedNotes2) 
-
         const polySynth = new PolySynth({
             polyphony: 8,
             volume : -7 ,
@@ -70,10 +70,9 @@ export default class ScaleDetails extends React.Component {
         }).toMaster();
         
         assignedNotes.forEach((note, i) => {      
-            console.log(note)
             setTimeout(() => {
                 polySynth.triggerAttackRelease(note, '0.5');
-            }, i * 550);
+            }, i * 510);
         })
     }
 
@@ -96,9 +95,14 @@ export default class ScaleDetails extends React.Component {
         }
     }
 
+    returnToLastPage = () => {
+        this.props.history.goBack()
+    }
+
     render(){
         return(
             <div>
+                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
                 {this.renderScale()}
             </div>
         )

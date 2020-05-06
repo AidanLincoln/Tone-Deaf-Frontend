@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default class MyChords extends React.Component {
     
     componentDidMount(){
-        console.log(this.props.user.user.id)
         api.collections.getUsersChords(this.props.user.user.id)
         .then(res => {
             this.props.updateUsersChords()
@@ -14,24 +13,20 @@ export default class MyChords extends React.Component {
     }
     
     handlePlayClick= (noteArray) => {
-        // event.preventDefault()
         let configNoteArray = noteArray.map(note => {
-            console.log(note)
             if(!note.includes('2')){
-                console.log('1st octave')
                 return `${note}3`
             }else{
                 if(note.includes('2')){
                     if(note.includes('#')){
-                        console.log('2nd octave sharp')
                         return `${note.slice(0,2)}4`
                     }else{
-                        console.log('2nd octave not sharp')
                         return `${note[0]}4`
                     }
                 }
             }
         })
+        console.log('Configured note array')
         console.log(configNoteArray)
         const polySynth = new PolySynth({
             polyphony: 8,
@@ -42,22 +37,17 @@ export default class MyChords extends React.Component {
         polySynth.triggerAttackRelease(configNoteArray, "2.8");
     }
     handleDelete = (chordId) => {
-        console.log(chordId)
         api.collections.destroyChord(chordId).then(message => {
             console.log(message)
         }).then(() => {
             this.props.updateUsersChords()
         })
-        // this.setState(prev => ({
-        //     collections: prev.collections.filter(collection => {
-        //         return collection.collection_info.id !== chordId
-        //     })
-        // }))
     }
 
     addChordToProgression = (collectionId, progressionNum) => {
         api.collections.addChordToProgression(collectionId, progressionNum)
         .then((res) => {
+            console.log("Chord added to progression")
             console.log(res)
         })
     }
@@ -65,15 +55,14 @@ export default class MyChords extends React.Component {
     renderChords = () => {
         if(!!this.props.usersChords){
             if(this.props.usersChords.length > 0){       
-                return this.props.usersChords.map(chord => {
+                return this.props.usersChords.map((chord, index) => {
                     let noteArray = []
                     let notesToPlay = []
                     chord.collection_notes.forEach(note => {
                         notesToPlay.push(note.name)
                     })
                     noteArray = this.props.sortNotes(notesToPlay)
-                    console.log(chord)
-                    return <li className="myChords" style={{listStyleType: "none"}}>
+                    return <li className="myChords" key={index} style={{listStyleType: "none"}}>
                         <br></br>
                         <div className="row">
                             <div className="col-6">
