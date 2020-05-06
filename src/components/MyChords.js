@@ -101,7 +101,7 @@ export default class MyChords extends React.Component {
             }else{
                 return <div>
                     <br></br>
-                    <h4 style={{position: "relative", left: "-20px"}}>No chords found.</h4>
+                    <h4 style={{position: "relative", left: "-20px"}}>You haven't saved any chords.</h4>
                 </div>
             }
         }

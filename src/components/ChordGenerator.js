@@ -194,6 +194,7 @@ export default class ChordGenerator extends React.Component {
                 <br></br>
                 <h1>Chord Generator</h1>
                 <br></br>
+                    <div className="container-fluid">
                     <div className="row" style={{height: '120px'}}>
                         <div className="col-3"></div>
                         <div className="col-2">
@@ -233,7 +234,8 @@ export default class ChordGenerator extends React.Component {
                             </select>
                         </div>
                         <div className="col-3"></div>
-                    </div>       
+                    </div>  
+                    </div>     
                 <button className={"niceButton"} onClick={this.onGenerate}>Generate</button>
                 {!!this.state.hasBeenGenerated ? <button className={"niceButton"} onClick={this.onPlay}>Play</button>: null}
                 {!!this.state.hasBeenGenerated && !!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button>: null}

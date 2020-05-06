@@ -25,9 +25,9 @@ export default class Navbar extends React.Component {
                     paddingTop: '30px',
                     textDecoration: "none"
                 }}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Tone Deaf
                 </NavLink>
 
@@ -39,9 +39,9 @@ export default class Navbar extends React.Component {
                 to="/chord-generator"
                 exact
                 style={link}
-                // activeStyle={{
-                  
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Chord Generator
                 </NavLink>
                 
@@ -50,9 +50,9 @@ export default class Navbar extends React.Component {
                 to="/scales"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Scales
                 </NavLink>
 
@@ -63,9 +63,9 @@ export default class Navbar extends React.Component {
                 to="/sign-in"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Sign-In
                 </NavLink>:null}
 
@@ -75,9 +75,9 @@ export default class Navbar extends React.Component {
                 to="/create-account"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Create Account
                 </NavLink>:null}
 
@@ -88,9 +88,9 @@ export default class Navbar extends React.Component {
                 to="/my-chords"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >My Chords
                 </NavLink> : null}
 
@@ -100,9 +100,9 @@ export default class Navbar extends React.Component {
                 to="/chord-progressions"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
                 >Chord Progressions
                 </NavLink> : null}
                 
@@ -112,9 +112,6 @@ export default class Navbar extends React.Component {
                 to="/"
                 exact
                 style={link}
-                // activeStyle={{
-                // background: "black"
-                // }}
                 onClick={this.props.onSignOut}
                 >Sign-Out
                 </NavLink>: null}

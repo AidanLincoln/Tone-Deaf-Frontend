@@ -60,7 +60,7 @@ export default class SignIn extends React.Component {
                     </form>
                 </div>
                 <br></br>
-                <span className="accountSpan" style={{paddingLeft: "10px", paddingRight: "10px"}}>New to Tone Deaf?</span>
+                <span style={{color: "white", fontSize: "large", fontWeight: "bold"}}>New to Tone Deaf?</span>
                 <br></br>
                 <div className="seperationLine"></div>         
                 <br></br>

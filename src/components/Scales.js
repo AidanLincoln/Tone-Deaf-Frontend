@@ -1,9 +1,8 @@
 import React from 'react'
 import {api} from '../services/api'
-import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Col from 'react-bootstrap/Col'
-// import Row from 'react-bootstrap/Row'
+import { Link } from 'react-router-dom';
+
 
 export default class Scales extends React.Component {
     constructor(){
@@ -27,7 +26,11 @@ export default class Scales extends React.Component {
             }
         })
         return majorScales.map(scale => {
-            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
+            let url = scale.scale_name.split(' ').join('_')
+            if(url[1] === '#'){
+                url = url.replace('#', '♯')
+            }
+            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
     renderMinorScales = () => {
@@ -37,7 +40,11 @@ export default class Scales extends React.Component {
             }
         })
         return minorScales.map(scale => {
-            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
+            let url = scale.scale_name.split(' ').join('_')
+            if(url[1] === '#'){
+                url = url.replace('#', '♯')
+            }
+            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
     renderMajorPentatonicScales = () => {
@@ -47,7 +54,11 @@ export default class Scales extends React.Component {
             }
         })
         return majorPentatonicScales.map(scale => {
-            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
+            let url = scale.scale_name.split(' ').join('_')
+            if(url[1] === '#'){
+                url = url.replace('#', '♯')
+            }
+            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", marginTop: "5px", marginBottom: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
     renderMinorPentatonicScales = () => {
@@ -56,13 +67,19 @@ export default class Scales extends React.Component {
                 return scale
             }
         })
+        
         return minorPentatonicScales.map(scale => {
-            return <li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li>
+            let url = scale.scale_name.split(' ').join('_')
+            if(url[1] === '#'){
+                url = url.replace('#', '♯')
+            }
+            return <Link to={`scales/${url}`} style={{color: "black"}}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
 
     render(){
         return(
+            <div className="container-fluid">
             <div className="row" style={{padding: "30px"}}>
                 <div className="col-3">
                     <h2>Major</h2>
@@ -89,6 +106,7 @@ export default class Scales extends React.Component {
                         {this.renderMinorPentatonicScales()}
                     </div>
                 </div>
+            </div>
             </div>
         )
     }

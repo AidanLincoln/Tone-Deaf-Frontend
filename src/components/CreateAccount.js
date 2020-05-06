@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from "react-redux"
-import { postUser } from '../redux'
 import { api } from '../services/api'
 
 export default class CreateAccount extends React.Component {
@@ -64,7 +62,7 @@ export default class CreateAccount extends React.Component {
                     </form>
                 </div>
                 <br></br>
-                <span className="accountSpan" style={{paddingLeft: "10px", paddingRight: "10px"}}>Already have an account?</span>
+                <span style={{color: "white", fontSize: "large", fontWeight: "bold"}}>Already have an account?</span>
                 <br></br>
                 <div className="seperationLine"></div>         
                 <br></br>

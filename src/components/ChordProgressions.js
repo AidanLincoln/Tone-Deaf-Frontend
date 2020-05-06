@@ -119,38 +119,40 @@ export default class ChordProgressions extends React.Component {
                 <br></br>
                 <h1>Chord Progressions</h1>
                 <br></br>
-                <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-2">
-                        <button className="niceButton" 
-                            style={this.state.currentProgression === 1 ? {backgroundColor: "white", color: "black"} : null}
-                            onClick={() => this.handleProgressionChange(1)}>
-                            Progression 1
-                        </button>
-                    </div>
-                    <div className="col-2">
-                        <button className="niceButton" 
-                            style={this.state.currentProgression === 2 ? {backgroundColor: "white", color: "black"} : null}
-                            onClick={() => this.handleProgressionChange(2)}>
-                            Progression 2
-                        </button>
-                    </div>
-                    <div className="col-2">
-                        <button className="niceButton" 
-                            style={this.state.currentProgression === 3 ? {backgroundColor: "white", color: "black"} : null}
-                            onClick={() => this.handleProgressionChange(3)}>
-                            Progression 3
-                        </button>
-                    </div>
-                    <div className="col-2">
-                        <button className="niceButton" 
-                            style={this.state.currentProgression === 4 ? {backgroundColor: "white", color: "black"} : null}
-                            onClick={() => this.handleProgressionChange(4)}>
-                            Progression 4
-                        </button>
-                    </div>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-2"></div>
+                        <div className="col-2">
+                            <button className="niceButton" 
+                                style={this.state.currentProgression === 1 ? {backgroundColor: "white", color: "black"} : null}
+                                onClick={() => this.handleProgressionChange(1)}>
+                                Progression 1
+                            </button>
+                        </div>
+                        <div className="col-2">
+                            <button className="niceButton" 
+                                style={this.state.currentProgression === 2 ? {backgroundColor: "white", color: "black"} : null}
+                                onClick={() => this.handleProgressionChange(2)}>
+                                Progression 2
+                            </button>
+                        </div>
+                        <div className="col-2">
+                            <button className="niceButton" 
+                                style={this.state.currentProgression === 3 ? {backgroundColor: "white", color: "black"} : null}
+                                onClick={() => this.handleProgressionChange(3)}>
+                                Progression 3
+                            </button>
+                        </div>
+                        <div className="col-2">
+                            <button className="niceButton" 
+                                style={this.state.currentProgression === 4 ? {backgroundColor: "white", color: "black"} : null}
+                                onClick={() => this.handleProgressionChange(4)}>
+                                Progression 4
+                            </button>
+                        </div>
 
-                    <div className="col-2"></div>
+                        <div className="col-2"></div>
+                    </div>
                 </div>
                 {this.progressionHasChords() ? 
                 <button className="niceButton" style={{position: "relative", top: "-105px"}} onClick={(event) => this.playChordProgression(event)}>Play Chord Progression</button> 

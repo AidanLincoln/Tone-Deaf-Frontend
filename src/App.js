@@ -11,10 +11,7 @@ import Home from './components/Home'
 import Scales from './components/Scales'
 import MyChords from './components/MyChords'
 import ChordProgressions from './components/ChordProgressions'
-
-import store from './redux/store'
-import {Provider} from 'react-redux'
-import {fetchUsers} from './redux'
+import ScaleDetails from './components/ScaleDetails'
 
 export default class App extends React.Component {
   constructor() {
@@ -45,26 +42,19 @@ export default class App extends React.Component {
     })
   }
 
-  // componentDidUpdate(){
-  //   if(!!localStorage.getItem("token") && this.state.usersChords === null){
-  //     api.auth.getCurrentUser().then(user => {
-  //       this.updateUsersChords()
-  //     });
-      
-  //   } 
-  // }
-
   updateUsersChords = () => {
     if(!!this.state.auth.user){
       api.collections.getUsersChords(this.state.auth.user.id).then((res) => {
         console.log(res.collections)
-        // let sortedCollections = res.collections.sort((a,b) => {
-        //   return a.collection_info.id - b.collection_info.id
-        // })
+        if(res.collections !== undefined){
+          let sortedCollections = res.collections.sort((a,b) => {
+            return b.collection_info.id - a.collection_info.id
+          })
         this.setState({
-            usersChords: res.collections
+            usersChords: sortedCollections
         })
-        console.log('chordsDidUpdate')
+      }
+        console.log('chords updated')
         console.log(res)
       })
     }
@@ -159,6 +149,12 @@ export default class App extends React.Component {
             <Navbar user={this.state.auth.user} onSignOut={this.signOut}/>
           </header>
           <div className = "main">
+
+            <Route
+              exact
+              path="/scales/:scale_name"
+              render={props => <ScaleDetails {...props} sortNotes={this.sortNotes} allScales={this.state.scales}/>}
+            />
 
             <Route
               exact
