@@ -14,18 +14,23 @@ export default class ScaleDetails extends React.Component {
     }
 
     componentDidMount(){
-        this.getScaleData()
+        this.getScaleData(this.props)
     }
     
-    getScaleData = () => {
+    getScaleData = (props) => {
         console.log("Finding scale and fetching notes...")
-        if(!!this.props.allScales){
-            let scale = this.findScale()
+        if(!!props.allScales){
+            console.log("found scales in props")
+            console.log(props.allScales)
+            let scale = this.findScale(props)
+            console.log(scale)
             if(!!scale[0]){
+                console.log(scale)
                 api.collections.getNotesInCollection(scale[0].id).then((res) => {
                     let notes = res.notes.map((note) => {
                         return note.name
                     })
+                    console.log("in api call")
                     // notes.indexOf(res.collection)
                     this.setState({
                         currentScale: res.collection,
@@ -37,17 +42,24 @@ export default class ScaleDetails extends React.Component {
     }
 
     componentWillReceiveProps(props){
-        this.getScaleData()
+        console.log("Component recieved props")
+        console.log(props)
+        this.getScaleData(props)
     }
 
-    findScale = () => {
-        return this.props.allScales.filter((scale) => {
-            let urlParams = this.props.match.params.scale_name
+    findScale = (props) => {
+        console.log("all scales")
+        console.log(props.allScales)
+        let scaleToShow = props.allScales.filter((scale) => {
+            let urlParams = props.match.params.scale_name
             if(urlParams[1] === '♯'){
                 urlParams = urlParams.replace('♯', '#')
             }
             return scale.scale_name === urlParams.split('_').join(' ')
         })
+        console.log("scale 2 show")
+        console.log(scaleToShow)
+        return scaleToShow
     }
 
     playScale = (event) => {
@@ -102,6 +114,7 @@ export default class ScaleDetails extends React.Component {
     render(){
         return(
             <div>
+                
                 <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
                 {this.renderScale()}
             </div>

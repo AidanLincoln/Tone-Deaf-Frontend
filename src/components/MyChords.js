@@ -36,6 +36,7 @@ export default class MyChords extends React.Component {
             }).toMaster();
         polySynth.triggerAttackRelease(configNoteArray, "2.8");
     }
+    
     handleDelete = (chordId) => {
         api.collections.destroyChord(chordId).then(message => {
             console.log(message)

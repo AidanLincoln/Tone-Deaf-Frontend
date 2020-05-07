@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import Logo from '../tonedeafV2.png'
 
 export default class Navbar extends React.Component {
     render(){
@@ -17,18 +18,21 @@ export default class Navbar extends React.Component {
                 exact
                 style={{
                     position: 'absolute',
-                    left: "50px",
                     padding: '2px',
                     margin: '0 6px 6px',
                     color: 'black',
                     float: 'left',
                     paddingTop: '30px',
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    left: "-560px",
+                    top: '-5px'
                 }}
                 activeStyle={{
                     fontWeight: 'bolder'
                 }}
-                >Tone Deaf
+                >
+                    <img className="navLogo" src={Logo}></img>
+
                 </NavLink>
 
             <div className="navbar">

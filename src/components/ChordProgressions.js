@@ -1,7 +1,6 @@
 import React from 'react'
 import { api } from '../services/api'
 import { PolySynth, Synth } from 'tone'
-import Piano from './Piano'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const polySynth = new PolySynth({
@@ -56,6 +55,7 @@ export default class ChordProgressions extends React.Component {
             }
         }
     }
+    
     componentDidMount(){
         this.props.updateUsersChords()
     }

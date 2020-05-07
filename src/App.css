@@ -125,7 +125,7 @@ html {
 }
 
 .formInput{
-  border: 7px solid #ff5757;
+  border: 5px solid #ff5757;
   padding: 4px;
   width: 225px;
 }
@@ -192,5 +192,17 @@ html {
   padding-Top: 10px;
   padding-bottom: 15px;
   margin-bottom: 22px;
+}
 
+.navLogo{
+  max-width:17%;
+  height:auto;
+}
+
+.homeLogo{
+  max-width:85%;
+  height:auto;
+  position: relative;
+  margin: auto;
+  top: 170px;
 }
