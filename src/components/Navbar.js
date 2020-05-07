@@ -24,8 +24,8 @@ export default class Navbar extends React.Component {
                     float: 'left',
                     paddingTop: '30px',
                     textDecoration: "none",
-                    left: "-560px",
-                    top: '-5px'
+                    left: "-590px",
+                    top: '-2px'
                 }}
                 activeStyle={{
                     fontWeight: 'bolder'

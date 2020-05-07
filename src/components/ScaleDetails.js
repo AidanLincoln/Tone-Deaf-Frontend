@@ -95,6 +95,7 @@ export default class ScaleDetails extends React.Component {
             })
             let scaleKey = this.state.currentScale.scale_name.split(' ')[0]
             return <div>
+                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
                 <br></br>
                 <h1>{this.state.currentScale.scale_name}</h1>
                 <br></br>
@@ -115,7 +116,7 @@ export default class ScaleDetails extends React.Component {
         return(
             <div>
                 
-                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
+                
                 {this.renderScale()}
             </div>
         )

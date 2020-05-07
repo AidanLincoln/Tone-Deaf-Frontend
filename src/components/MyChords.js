@@ -62,7 +62,8 @@ export default class MyChords extends React.Component {
                     chord.collection_notes.forEach(note => {
                         notesToPlay.push(note.name)
                     })
-                    noteArray = this.props.sortNotes(notesToPlay)
+                    //add new sort in app
+                    noteArray = this.props.sortNotes(notesToPlay, chord.collection_info.scale_name)
                     return <li className="myChords" key={index} style={{listStyleType: "none"}}>
                         <br></br>
                         <div className="row">

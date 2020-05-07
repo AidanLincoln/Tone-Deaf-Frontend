@@ -206,3 +206,22 @@ html {
   margin: auto;
   top: 170px;
 }
+
+.scaleLink{
+  transition: 0.5;
+}
+.scaleLink:hover{
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.scaleLi{
+  transition-property: all;
+  transition-duration: 1s;
+  transition: 0.5s;
+}
+.scaleLi:hover{
+  background-color: white;
+  opacity: 0.75;
+  /* transition: 0.5s; */
+}

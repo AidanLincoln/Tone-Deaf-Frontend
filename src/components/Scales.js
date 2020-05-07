@@ -28,7 +28,7 @@ export default class Scales extends React.Component {
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} className='scaleLink' style={{color: "black"}} key={index}><li className="scaleLi" style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
 
@@ -43,7 +43,7 @@ export default class Scales extends React.Component {
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} className='scaleLink' style={{color: "black"}} key={index}><li className="scaleLi" style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
 
@@ -58,7 +58,7 @@ export default class Scales extends React.Component {
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", marginTop: "5px", marginBottom: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} className='scaleLink' style={{color: "black"}} key={index}><li className="scaleLi" style={{listStyleType: "none", marginTop: "5px", marginBottom: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
     
@@ -74,7 +74,7 @@ export default class Scales extends React.Component {
             if(url[1] === '#'){
                 url = url.replace('#', '♯')
             }
-            return <Link to={`scales/${url}`} style={{color: "black"}} key={index}><li style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
+            return <Link to={`scales/${url}`} className='scaleLink' style={{color: "black"}} key={index}><li className="scaleLi" style={{listStyleType: "none", margin: "5px"}}>{scale.scale_name}</li></Link>
         })
     }
 
