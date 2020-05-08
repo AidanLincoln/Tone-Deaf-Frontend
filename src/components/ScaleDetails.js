@@ -74,13 +74,22 @@ export default class ScaleDetails extends React.Component {
                 assignedNotes.push(`${this.state.scaleNotes[i]}4`)
             }
         }
+        if(assignedNotes[0].includes('#')){
+            console.log('in if')
+            assignedNotes.push(`${assignedNotes[0].substr(0,2)}4`)
+        }else{
+            console.log("in else")
+            assignedNotes.push(`${assignedNotes[0].substr(0,1)}4`)
+        }
+        console.log(assignedNotes)
+        
         const polySynth = new PolySynth({
             polyphony: 8,
             volume : -7 ,
             detune : 0 ,
             voice : Synth
         }).toMaster();
-        
+
         assignedNotes.forEach((note, i) => {      
             setTimeout(() => {
                 polySynth.triggerAttackRelease(note, '0.5');
@@ -93,6 +102,7 @@ export default class ScaleDetails extends React.Component {
             let scalesNotes = this.state.scaleNotes.map((note) => {
                 return ` ${note}`
             })
+            scalesNotes.push(scalesNotes[0])
             let scaleKey = this.state.currentScale.scale_name.split(' ')[0]
             return <div>
                 <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
@@ -103,7 +113,7 @@ export default class ScaleDetails extends React.Component {
                 <br></br>
                 <button className="niceButton" onClick={this.playScale}>Play</button>
                 <br></br>
-                <Piano octaveOne={this.state.scaleNotes} octaveTwo={[]} scaleKey={scaleKey}></Piano>
+                <Piano octaveOne={this.state.scaleNotes} octaveTwo={this.state.scaleNotes} scaleKey={scaleKey}></Piano>
             </div>
         }
     }
@@ -114,9 +124,7 @@ export default class ScaleDetails extends React.Component {
 
     render(){
         return(
-            <div>
-                
-                
+            <div>          
                 {this.renderScale()}
             </div>
         )
