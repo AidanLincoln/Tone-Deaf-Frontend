@@ -4,9 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default class Piano extends React.Component {
 
     orderKeys = () => {
-        const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+        const allNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         let notesToDisplay = []
-        let i = allNotes.indexOf(this.props.scaleKey)
+
+        // console.log()
+        // let i = allNotes.indexOf(this.props.scaleKey)
+        let i = 0
         while(notesToDisplay.length < 12){
             if(i < allNotes.length){
                 notesToDisplay.push(allNotes[i])
@@ -21,9 +24,6 @@ export default class Piano extends React.Component {
 
     mapScaleToKeys = () => {
         const colorObj = {
-            'A': 'white',
-            'A#': 'black',
-            'B': 'white',
             'C': 'white',
             'C#': 'black',
             'D': 'white',
@@ -32,7 +32,10 @@ export default class Piano extends React.Component {
             'F': 'white',
             'F#': 'black',
             'G': 'white',
-            'G#': 'black'
+            'G#': 'black',
+            'A': 'white',
+            'A#': 'black',
+            'B': 'white'
         }   
         return this.orderKeys().map((note, index) => {
             return <div className="col-1"
@@ -44,9 +47,6 @@ export default class Piano extends React.Component {
     
     mapActiveKeys = (octave) => {
         let keyPressed = {
-            'A': false,
-            'A#': false,
-            'B': false,
             'C': false,
             'C#': false,
             'D': false,
@@ -55,7 +55,10 @@ export default class Piano extends React.Component {
             'F': false,
             'F#': false,
             'G': false,
-            'G#': false
+            'G#': false,
+            'A': false,
+            'A#': false,
+            'B': false
         }
         octave.forEach((note) => {
             keyPressed[note] = true

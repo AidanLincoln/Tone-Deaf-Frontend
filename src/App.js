@@ -97,10 +97,7 @@ export default class App extends React.Component {
   }
 
   sortNotes = (notes) => {
-    let notePlacementObj = {
-        'A': 1,
-        'A#': 2,
-        'B': 3,
+    let notePlacementObj = {      
         'C': 4,
         'C#': 5,
         'D': 6,
@@ -110,9 +107,9 @@ export default class App extends React.Component {
         'F#': 10,
         'G': 11,
         'G#': 12,
-        'A2': 13,
-        'A#2': 14,
-        'B2': 15,
+        'A': 13,
+        'A#': 14,
+        'B': 15,
         'C2': 16,
         'C#2': 17,
         'D2': 18,
@@ -121,7 +118,10 @@ export default class App extends React.Component {
         'F2': 21,
         'F#2': 22,
         'G2': 23,
-        'G#2': 24
+        'G#2': 24,
+        'A2': 25,
+        'A#2': 26,
+        'B2': 27
     }
     let noteNums = notes.map(note => {
         return notePlacementObj[note]
@@ -139,55 +139,55 @@ export default class App extends React.Component {
     })
     return sortedNotes
   } 
+//consider destroying this
+  // sortChordNotes = (notes, scaleName) => {
+  //   const allNoteArray = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#', 'A2', 'A#2', 'B2', 'C2', 'C#2', 'D2', 'D#2', 'E2','F2', 'F#2', 'G2', 'G#2']
+  //   let chordSort = []
+  //   let abcSort = this.sortNotes(notes)
+  //   let octaveOne = []
+  //   let octaveTwo = []
+  //   abcSort.forEach((note) => {
+  //     if(note.includes('2')){
+  //       octaveTwo.push(note.substr(1))
+  //     }else{
+  //       octaveOne.push(note.substr(1))
+  //     }
+  //   })
+  //   let rootOfScale = ''
+  //   if(scaleName.includes('#')){
+  //     rootOfScale = scaleName.substr(0,2)
+  //   }else{
+  //     rootOfScale = scaleName.substr(0,1)
+  //   }
+  //   // console.log(rootOfScale)
+  //   // console.log(octaveOne)
+  //   // console.log(octaveTwo)
+  //   let firstNotes = []
+  //   let lastNotes = []
+  //   octaveOne.forEach((note) => {
+  //     if(allNoteArray.indexOf(rootOfScale) <= allNoteArray.indexOf(note)){
+  //       firstNotes.push(note)
+  //     }else{
+  //       lastNotes.push(note)
+  //     }
+  //   })
+  //   chordSort.push(...firstNotes)
+  //   chordSort.push(...lastNotes)
 
-  sortChordNotes = (notes, scaleName) => {
-    const allNoteArray = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#', 'A2', 'A#2', 'B2', 'C2', 'C#2', 'D2', 'D#2', 'E2','F2', 'F#2', 'G2', 'G#2']
-    let chordSort = []
-    let abcSort = this.sortNotes(notes)
-    let octaveOne = []
-    let octaveTwo = []
-    abcSort.forEach((note) => {
-      if(note.includes('2')){
-        octaveTwo.push(note.substr(1))
-      }else{
-        octaveOne.push(note.substr(1))
-      }
-    })
-    let rootOfScale = ''
-    if(scaleName.includes('#')){
-      rootOfScale = scaleName.substr(0,2)
-    }else{
-      rootOfScale = scaleName.substr(0,1)
-    }
-    // console.log(rootOfScale)
-    // console.log(octaveOne)
-    // console.log(octaveTwo)
-    let firstNotes = []
-    let lastNotes = []
-    octaveOne.forEach((note) => {
-      if(allNoteArray.indexOf(rootOfScale) <= allNoteArray.indexOf(note)){
-        firstNotes.push(note)
-      }else{
-        lastNotes.push(note)
-      }
-    })
-    chordSort.push(...firstNotes)
-    chordSort.push(...lastNotes)
-
-    firstNotes = []
-    lastNotes = []
-    octaveTwo.forEach((note) => {
-      if(allNoteArray.indexOf(`${rootOfScale}2`) <= allNoteArray.indexOf(note)){
-        firstNotes.push(note)
-      }else{
-        lastNotes.push(note)
-      }
-    })
-    chordSort.push(...firstNotes)
-    chordSort.push(...lastNotes)
-    console.log(chordSort)
-    return chordSort
-  }
+  //   firstNotes = []
+  //   lastNotes = []
+  //   octaveTwo.forEach((note) => {
+  //     if(allNoteArray.indexOf(`${rootOfScale}2`) <= allNoteArray.indexOf(note)){
+  //       firstNotes.push(note)
+  //     }else{
+  //       lastNotes.push(note)
+  //     }
+  //   })
+  //   chordSort.push(...firstNotes)
+  //   chordSort.push(...lastNotes)
+  //   console.log(chordSort)
+  //   return chordSort
+  // }
 
 
 
@@ -239,7 +239,7 @@ export default class App extends React.Component {
             <Route
               exact
               path="/my-chords"
-              render={ props => <MyChords {...props} updateUsersChords={this.updateUsersChords} sortNotes={this.sortChordNotes} usersChords={this.state.usersChords} user={this.state.auth} />}/>
+              render={ props => <MyChords {...props} updateUsersChords={this.updateUsersChords} sortNotes={this.sortNotes} usersChords={this.state.usersChords} user={this.state.auth} />}/>
 
           </div>
           </Router>

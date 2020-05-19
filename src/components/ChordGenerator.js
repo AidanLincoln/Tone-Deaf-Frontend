@@ -17,8 +17,15 @@ export default class ChordGenerator extends React.Component {
             hasBeenGenerated: false,
             octaveOneNotes: [],
             octaveTwoNotes: [],
-            hasBeenSaved: false
+            hasBeenSaved: false,
+            genAlgo: "normal"
         }
+    }
+
+    onAlgoChange = (event) => {
+        this.setState({
+            genAlgo: event.target.value
+        })
     }
 
     onScaleChange = (event) => {
@@ -40,6 +47,7 @@ export default class ChordGenerator extends React.Component {
     }
 
     onGenerate = () => {
+        console.log("Creating chord with jazz generation algorithm")
         let genScale;
         this.props.allScales.forEach((scale) => {
             if(scale.scale_name === `${this.state.key} ${this.state.scaleType}`){
@@ -71,7 +79,6 @@ export default class ChordGenerator extends React.Component {
                 let chord = []
                 const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#']
                 while(chord.length < this.state.numberOfNotes){
-                    ///make a 50/50 chance of starting on creating upper octave first?
                     if(chord.length < 4){
                         let randomIndex = Math.floor(Math.random() * notesInScale.length)
                         let noteToAdd = notesInScale[randomIndex]
@@ -139,6 +146,120 @@ export default class ChordGenerator extends React.Component {
         })
     }
 
+    onGenerate2 = () => {
+        console.log("Creating chord with normal generation algorithm")
+        let genScale;
+        this.props.allScales.forEach((scale) => {
+            if(scale.scale_name === `${this.state.key} ${this.state.scaleType}`){
+                genScale = scale
+            }
+        })
+        this.setState({
+            currentScale: genScale,
+            octaveOneNotes: [],
+            octaveTwoNotes: []
+        },()=> {
+            let notesInScale;
+            let staticNotesInScale;
+            let octaveTwo;
+            api.collections.getNotesInCollection(this.state.currentScale.id)
+            .then(res => {
+                notesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                staticNotesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                this.setState({
+                    currentScaleNotes: notesInScale
+                })
+                octaveTwo = res.notes.map((note)=>{
+                    return note.name
+                })
+                let chord = []
+                const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#']
+                while(chord.length < this.state.numberOfNotes){
+                    if(chord.length < 4){
+                        let randomIndex = Math.floor(Math.random() * notesInScale.length)
+                        let noteToAdd = notesInScale[randomIndex]
+                        this.setState((prevState) => ({
+                            octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
+                        }))
+                        chord.push(`${noteToAdd}3`)
+                        if(notesInScale.includes(allNotes[allNotes.indexOf(noteToAdd)-1])){
+                            notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(noteToAdd)-1]), 1)
+                        }
+                        if(notesInScale.includes(allNotes[allNotes.indexOf(noteToAdd)+1])){
+                            notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
+                        }
+                        if(noteToAdd === "G#" && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(noteToAdd === "A" && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
+                        }      
+                        if(noteToAdd === "G#" && octaveTwo.includes("A")){
+                            octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                        }    
+                        if(noteToAdd === "A#" && octaveTwo.includes("B")){
+                            octaveTwo.splice(octaveTwo.indexOf("B"), 1)
+                        }      
+                        notesInScale.splice(notesInScale.indexOf(noteToAdd), 1)
+                    }else{
+                        // remove all notes from oc2 that are a semitone apart from any of the chord notes
+                        octaveTwo.forEach((note) => {
+                            chord.forEach(chordNote => {
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                                }
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                                }
+                            })
+                        })
+                        let randomIndexOc2 = Math.floor(Math.random() * octaveTwo.length) 
+                        if(chord.includes(`${staticNotesInScale[staticNotesInScale.length -1]}3`)){
+                            let lastNote = staticNotesInScale[staticNotesInScale.length -1]
+                            if(staticNotesInScale[0] === allNotes[allNotes.indexOf(lastNote)+1]){
+                                if(octaveTwo.includes(staticNotesInScale[0])){
+                                    octaveTwo.splice(0, 1)
+                                    randomIndexOc2 = Math.floor(Math.random() * octaveTwo.length)
+                                }
+                            }
+                        }
+                        let noteToAdd = octaveTwo[randomIndexOc2]
+                        this.setState((prevState) => ({
+                            octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
+                        }))
+                        chord.push(`${noteToAdd}4`)
+                        if(octaveTwo.includes(allNotes[allNotes.indexOf(noteToAdd)-1])){
+                            octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(noteToAdd)-1]), 1)
+                        }
+                        if(octaveTwo.includes(allNotes[allNotes.indexOf(octaveTwo[randomIndexOc2])+1])){
+                            octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(noteToAdd)+1]), 1)
+                        }
+                        if(noteToAdd === "G#" && octaveTwo.includes("A")){
+                            octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                        }
+                        if(noteToAdd === "A" && octaveTwo.includes("G#")){
+                            octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
+                        }
+                        octaveTwo.splice(octaveTwo.indexOf(noteToAdd), 1)
+                    }             
+                }  
+                console.log(chord) 
+                this.setState({
+                    currentChord: chord,
+                    hasBeenGenerated: true,
+                    hasBeenSaved: false
+                })           
+            })
+        })
+    }
+
+
+
+
     onPlay = (event) => {
         event.preventDefault()
         const polySynth = new PolySynth({
@@ -172,10 +293,17 @@ export default class ChordGenerator extends React.Component {
                 <br></br>
                     <div className="container-fluid">
                     <div className="row" style={{height: '120px'}}>
-                        <div className="col-3"></div>
+                        <div className="col-2"></div>
+                        <div className="col-2">
+                            <label className="formLabel">Algorithm</label><br></br>
+                            <select className="formSelect" style={{width: "120px"}} id="gen-algo" onChange={(event) => this.onAlgoChange(event)}>
+                                <option value="normal">Normal</option>
+                                <option value="jazz">Jazz</option>
+                            </select>
+                        </div>
                         <div className="col-2">
                             <label className="formLabel">Scale</label><br></br>
-                            <select className="formSelect" style={{width: "160px"}} id="chord-scale" onChange={(event) => this.onScaleChange(event)}>
+                            <select className="formSelect" style={{width: "170px"}} id="chord-scale" onChange={(event) => this.onScaleChange(event)}>
                                 <option value="Major">Major</option>
                                 <option value="Minor">Minor</option>
                                 <option value="Major Pentatonic">Major Pentatonic</option>
@@ -209,10 +337,10 @@ export default class ChordGenerator extends React.Component {
                                 <option value="7">7</option>
                             </select>
                         </div>
-                        <div className="col-3"></div>
+                        <div className="col-2"></div>
                     </div>  
                     </div>     
-                <button className={"niceButton"} onClick={this.onGenerate}>Generate</button>
+                <button className={"niceButton"} onClick={this.state.genAlgo === "normal" ? this.onGenerate2 : this.onGenerate}>Generate</button>
                 {!!this.state.hasBeenGenerated ? <button className={"niceButton"} onClick={this.onPlay}>Play</button>: null}
                 {!!this.state.hasBeenGenerated && !!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button>: null}
                 <br></br>
