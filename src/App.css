@@ -226,3 +226,76 @@ html {
   opacity: 0.75;
   /* transition: 0.5s; */
 }
+@media screen and (min-width: 1024px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: 340px;
+    margin-top: 5px;
+  }
+  .formLabel{
+    font-size: 1rem;
+  }
+  .scaleLi{
+    font-size: 0.9rem;
+  }
+  .scaleLabel{
+    font-size: 1.5rem;
+  }
+  .formSelect{
+    width: auto;
+  }
+  .textBackground{
+    font-size: large;
+  }
+}
+@media screen and (min-width: 1280px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: 130px;
+  }
+  .formLabel{
+    font-size: larger;
+  }
+  .scaleLi{
+    font-size: 1.3rem;
+  }
+  .scaleLabel{
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 1366px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: 70px;
+  }
+  .formLabel{
+    font-size: larger;
+  }
+  .scaleLi{
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 1440px){
+  /* optimized for 1440 already */
+}
+@media screen and (min-width: 1600px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: -140px;
+    margin-top: -5px;
+  }
+}
+@media screen and (min-width: 1680px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: -190px;
+    margin-top: -5px;
+  }
+}
+@media screen and (min-width: 1920px){
+  .navLogo{
+    position: 'absolute';
+    margin-left: -400px;
+    margin-top: -14px;
+  }
+}

@@ -83,26 +83,26 @@ export default class Scales extends React.Component {
             <div className="container-fluid">
             <div className="row" style={{padding: "30px"}}>
                 <div className="col-3">
-                    <h2>Major</h2>
+                    <h2 className="scaleLabel">Major</h2>
                     <div className="scaleColumn">
                         {this.renderMajorScales()}
                     </div>
                 </div>
                 <div className="col-3">
-                    <h2>Minor</h2>
+                    <h2 className="scaleLabel">Minor</h2>
                     <div className="scaleColumn">
                         {this.renderMinorScales()}
                     </div>
                 </div>
                 <div className="col-3">
-                    <h2>Major Pentatonic</h2>
+                    <h2 className="scaleLabel">Major Pentatonic</h2>
                     <div className="scaleColumn">
                         {this.renderMajorPentatonicScales()}
                     </div>
                     
                 </div>
                 <div className="col-3">
-                    <h2>Minor Pentatonic</h2>
+                    <h2 className="scaleLabel">Minor Pentatonic</h2>
                     <div className="scaleColumn">
                         {this.renderMinorPentatonicScales()}
                     </div>
