@@ -256,8 +256,114 @@ export default class ChordGenerator extends React.Component {
             })
         })
     }
+    // developing new generation algo
+    onGenerate3 = () => {
+        console.log("Creating chord with NEW generation algorithm")
+        let genScale;
+        this.props.allScales.forEach((scale) => {
+            if(scale.scale_name === `${this.state.key} ${this.state.scaleType}`){
+                genScale = scale
+            }
+        })
+        this.setState({
+            currentScale: genScale,
+            octaveOneNotes: [],
+            octaveTwoNotes: []
+        },()=> {
+            let notesInScale;
+            let staticNotesInScale;
+            let octaveTwo;
+            api.collections.getNotesInCollection(this.state.currentScale.id)
+            .then(res => {
+                notesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                staticNotesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                this.setState({
+                    currentScaleNotes: notesInScale
+                })
+                octaveTwo = res.notes.map((note)=>{
+                    return note.name
+                })
+                let chord = []
+                const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+                while(chord.length < this.state.numberOfNotes){
+                   //on every iteration a random octave between 1 or 2 should be picked, and a random index of that array should also be picked
+                   let randomOctave = Math.floor(Math.random() * 2) + 1 
+                   if(randomOctave === 1 && !notesInScale.length){
+                       randomOctave = 2
+                   }
+                   if(randomOctave === 2 && !octaveTwo.length){
+                    randomOctave = 1
+                }
+                   let randomIndex;
+                   if(randomOctave === 1){
+                    notesInScale.forEach((note) => {
+                        chord.forEach(chordNote => {
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                            }
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                            }
+                        })
+                        //if chord contains G#, remove A from notesInScale
+                        if(notesInScale.includes(allNotes[0]) && chord.includes(allNotes[11])){
+                            notesInScale.splice(notesInScale.indexOf(allNotes[0]), 1)
+                        }
+                    })
+                    randomIndex = Math.floor(Math.random() * notesInScale.length)
+                    let noteToAdd = notesInScale[randomIndex]
+                        this.setState((prevState) => ({
+                            octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
+                        }))
+                   chord.push(`${noteToAdd}3`)
+                   console.log(noteToAdd, "note to add")
+                   console.log(notesInScale, "notes in scale")
+                   console.log(randomIndex, "random index")
+                   notesInScale.splice(randomIndex, 1)
+                   }
+                   if(randomOctave === 2){
+                    
+                    //remove notes from octave two that are a semitone apart from any notes in the chord
 
-
+                        octaveTwo.forEach((note) => {
+                            chord.forEach(chordNote => {
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                                }
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                                }
+                            })
+                            //if chord contains G#, remove A from octave two
+                            if(octaveTwo.includes(allNotes[0]) && chord.includes(allNotes[11])){
+                                octaveTwo.splice(octaveTwo.indexOf(allNotes[0]), 1)
+                            }
+                        })
+                        randomIndex = Math.floor(Math.random() * octaveTwo.length)
+                        let noteToAdd = octaveTwo[randomIndex]
+                        this.setState((prevState) => ({
+                            octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
+                        }))
+                        chord.push(`${noteToAdd}4`)
+                        console.log(noteToAdd, "note to add")
+                        console.log(octaveTwo, "notes in scale")
+                        console.log(randomIndex, "random index")
+                        octaveTwo.splice(randomIndex, 1)
+                    }
+                }
+                console.log(chord) 
+                this.setState({
+                    currentChord: chord,
+                    hasBeenGenerated: true,
+                    hasBeenSaved: false
+                })           
+            })
+        })
+    }
 
 
     onPlay = (event) => {
@@ -297,8 +403,9 @@ export default class ChordGenerator extends React.Component {
                         <div className="col-2">
                             <label className="formLabel">Algorithm</label><br></br>
                             <select className="formSelect" style={{width: "120px"}} id="gen-algo" onChange={(event) => this.onAlgoChange(event)}>
-                                <option value="normal">Normal</option>
+                                <option value="classic">Classic</option>
                                 <option value="jazz">Jazz</option>
+                                <option value="new">New</option>
                             </select>
                         </div>
                         <div className="col-2">
@@ -340,7 +447,7 @@ export default class ChordGenerator extends React.Component {
                         <div className="col-2"></div>
                     </div>  
                     </div>     
-                <button className={"niceButton"} onClick={this.state.genAlgo === "normal" ? this.onGenerate2 : this.onGenerate}>Generate</button>
+                <button className={"niceButton"} onClick={this.state.genAlgo === "classic" ? this.onGenerate2 : this.state.genAlgo === "jazz" ? this.onGenerate : this.onGenerate3}>Generate</button>
                 {!!this.state.hasBeenGenerated ? <button className={"niceButton"} onClick={this.onPlay}>Play</button>: null}
                 {!!this.state.hasBeenGenerated && !!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button>: null}
                 <br></br>

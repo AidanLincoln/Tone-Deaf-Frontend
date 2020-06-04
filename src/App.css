@@ -267,6 +267,7 @@ html {
   .navLogo{
     position: 'absolute';
     margin-left: 70px;
+    margin-top: -2px;
   }
   .formLabel{
     font-size: larger;
@@ -277,6 +278,21 @@ html {
 }
 @media screen and (min-width: 1440px){
   /* optimized for 1440 already */
+  .navLogo{
+    position: 'absolute';
+    margin-top: -2px;
+    margin-left: -5px;
+  }
+  .formLabel{
+    font-size: x-large;
+  }
+  .scaleLi{
+    font-size: 1.4rem;
+  }
+  .textBackground{
+    font-size: 1.5rem;
+  }
+
 }
 @media screen and (min-width: 1600px){
   .navLogo{
@@ -298,4 +314,20 @@ html {
     margin-left: -400px;
     margin-top: -14px;
   }
+  .formLabel{
+    font-size: xx-large;
+  }
+  .formSelect{
+    font-size: 1.2rem;
+  }
+  .scaleLi{
+    font-size: 1.6rem;
+  }
+  .scaleLabel{
+    font-size: 2.2rem;
+  }
+  .textBackground{
+    font-size: 1.6rem;
+  }
+
 }
