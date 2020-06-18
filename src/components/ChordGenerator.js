@@ -18,7 +18,7 @@ export default class ChordGenerator extends React.Component {
             octaveOneNotes: [],
             octaveTwoNotes: [],
             hasBeenSaved: false,
-            genAlgo: "normal"
+            genAlgo: "classic"
         }
     }
 
