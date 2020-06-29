@@ -309,9 +309,14 @@ export default class ChordGenerator extends React.Component {
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
                             }
                         })
-                        //if chord contains G#, remove A from notesInScale
-                        if(notesInScale.includes(allNotes[0]) && chord.includes(allNotes[11])){
-                            notesInScale.splice(notesInScale.indexOf(allNotes[0]), 1)
+                       
+                        //if chord contains G#, remove A from notesInScale... vice versa
+                        
+                        if(chord.includes("G#3") && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(chord.includes("A3") && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
                         }
                     })
                     randomIndex = Math.floor(Math.random() * notesInScale.length)
@@ -320,9 +325,7 @@ export default class ChordGenerator extends React.Component {
                             octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
                         }))
                    chord.push(`${noteToAdd}3`)
-                   console.log(noteToAdd, "note to add")
-                   console.log(notesInScale, "notes in scale")
-                   console.log(randomIndex, "random index")
+        
                    notesInScale.splice(randomIndex, 1)
                    }
                    if(randomOctave === 2){
@@ -339,8 +342,12 @@ export default class ChordGenerator extends React.Component {
                                 }
                             })
                             //if chord contains G#, remove A from octave two
-                            if(octaveTwo.includes(allNotes[0]) && chord.includes(allNotes[11])){
-                                octaveTwo.splice(octaveTwo.indexOf(allNotes[0]), 1)
+                        
+                            if(chord.includes("G#4") && octaveTwo.includes("A")){
+                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                            }
+                            if(chord.includes("A4") && octaveTwo.includes("G#")){
+                                octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
                             }
                         })
                         randomIndex = Math.floor(Math.random() * octaveTwo.length)
@@ -349,9 +356,7 @@ export default class ChordGenerator extends React.Component {
                             octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
                         }))
                         chord.push(`${noteToAdd}4`)
-                        console.log(noteToAdd, "note to add")
-                        console.log(octaveTwo, "notes in scale")
-                        console.log(randomIndex, "random index")
+                        
                         octaveTwo.splice(randomIndex, 1)
                     }
                 }
