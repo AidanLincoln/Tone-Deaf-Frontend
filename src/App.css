@@ -110,10 +110,19 @@ html {
   margin-left: 50px;
   margin-right: 90px;
   border-radius: 10px;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
 }
 .textBackground{
-  background-color: #ff7b7b;
-  border: 2px solid white;
+  /* background-color: #ff7b7b; */
+  background-color: white;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  /* border-left: 2px solid white;
+  border-top: 2px solid white; */
+  border-radius: 7px;
   padding: 5px;
 }
 .accountForm{
@@ -189,13 +198,17 @@ html {
               25px 25px rgba(129, 129, 129, 0.05);
   list-style-type: none;
   background-color: #ff5757;
-  height: 130px;
-  width: 600px;
+  height: 150px;
+  width: 700px;
   margin: auto;
-  padding-Top: 10px;
-  padding-bottom: 15px;
   margin-bottom: 22px;
   border-radius: 10px;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  padding-Top: 15px;
+  /* padding-bottom: 20px; */
 }
 
 .navLogo{

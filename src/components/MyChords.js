@@ -75,7 +75,7 @@ export default class MyChords extends React.Component {
                                 <button className={"niceButton"} onClick={() => this.handlePlayClick(notesToPlay)}>Play</button>
                                 <button className={"niceButton"} onClick={() => this.handleDelete(chord.collection_info.id)}>Delete</button>
                             </div>
-                            <div className="col-6" style={{left: "-70px", top: "25px"}}>
+                            <div className="col-6" style={{left: "-70px", top: "12px"}}>
                                 <div className="textBackground" style={{padding: "20px"}}>
                                     <h3>Add to a chord progression</h3>
                                     <br></br>

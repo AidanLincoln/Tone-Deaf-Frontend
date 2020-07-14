@@ -30,11 +30,10 @@ export default class ChordProgressions extends React.Component {
                     })
                     let notesToDisplay = this.props.sortNotes(notesInChord).join(', ')
                     return <li className="chordLi" key={index}>
-                        <h4>Scale: {chord.collection_info.scale_name}</h4>
+                        <h3>Scale: {chord.collection_info.scale_name}</h3>
                         <h4>Notes: {notesToDisplay}</h4>
                         <button className="niceButton" onClick={(event) => this.playChord(notesInChord)}>Play</button>
                         <button className="niceButton" onClick={() => this.removeFromProgression(chord.collection_info.id)}>Remove from Progression</button>
-                        <br></br><br></br>
                     </li>
                 })
             }else{
