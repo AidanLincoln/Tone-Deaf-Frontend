@@ -70,6 +70,10 @@ html {
   padding: 20px;
   font-size: x-large;
   border-radius: 10px;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
   /* border: 3px solid rgba(0, 0, 0, 0.6); */
 }
 
@@ -116,12 +120,12 @@ html {
   border-left: 2px solid white;
 }
 .textBackground{
-  /* background-color: #ff7b7b; */
-  background-color: white;
+  background-color: #ff7b7b;
+  /* background-color: white; */
   border-right: 2px solid black;
   border-bottom: 2px solid black;
-  /* border-left: 2px solid white;
-  border-top: 2px solid white; */
+  border-left: 2px solid white;
+  border-top: 2px solid white;
   border-radius: 7px;
   padding: 5px;
 }

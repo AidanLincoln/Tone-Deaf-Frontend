@@ -32,8 +32,10 @@ export default class ChordProgressions extends React.Component {
                     return <li className="chordLi" key={index}>
                         <h3>Scale: {chord.collection_info.scale_name}</h3>
                         <h4>Notes: {notesToDisplay}</h4>
+                        <div style={{backgroundColor: "#ff7b7b", borderTop: "3px solid #ff7b7b"}}>
                         <button className="niceButton" onClick={(event) => this.playChord(notesInChord)}>Play</button>
                         <button className="niceButton" onClick={() => this.removeFromProgression(chord.collection_info.id)}>Remove from Progression</button>
+                        </div>
                     </li>
                 })
             }else{
