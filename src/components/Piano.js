@@ -76,7 +76,7 @@ export default class Piano extends React.Component {
             <div style={{marginTop: "-15px"}}>
                 <div className="container-fluid">
                 {this.props.octaveTwo.length > 0 ?   
-                    <div className="row" style={{padding: "40px", paddingLeft:"60px",   paddingRight:"60px"}}>
+                    <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
                         <div className="col-6">
                             <div className="row">
                                 {this.mapScaleToKeys()}

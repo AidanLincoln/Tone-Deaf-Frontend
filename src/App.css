@@ -41,7 +41,6 @@
 
 .navHome {
   position: relative;
-  /* left: 50px; */
   width: fit-content;
   text-decoration: none;
   color: black;
@@ -56,7 +55,6 @@
 }
 
 html { 
-  /* background-color: #ff8078; */
   background-color: #ff7b7b;
 }
 
@@ -74,7 +72,6 @@ html {
   border-right: 4px solid black;
   border-top: 2px solid white;
   border-left: 2px solid white;
-  /* border: 3px solid rgba(0, 0, 0, 0.6); */
 }
 
 .main {
@@ -121,7 +118,6 @@ html {
 }
 .textBackground{
   background-color: #ff7b7b;
-  /* background-color: white; */
   border-right: 2px solid black;
   border-bottom: 2px solid black;
   border-left: 2px solid white;
@@ -132,8 +128,9 @@ html {
 .accountForm{
   margin: 0 auto;
   background-color: white;
-  border: 10px solid #ff5757;
+  border: 7px solid #ff5757;
   width: 650px;
+  outline: 3px solid white;
 }
 
 .formLabel{
@@ -141,7 +138,7 @@ html {
 }
 
 .formInput{
-  border: 5px solid #ff5757;
+  border: 4px solid #ff5757;
   padding: 4px;
   width: 225px;
 }
@@ -154,16 +151,12 @@ html {
   width: 25%;
   height: 33px;
   font-size: 100%;
-  /* font-weight: bold; */
   border-radius: 0;
   background-color: #ff5757;
   border: 2px solid white;
   border-right: 2px solid #c0392b;
   border-bottom: 2px solid #c0392b;
   color: white;
-  /* appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none; */
   /* Adding transition effect */
   transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
 }
@@ -212,7 +205,6 @@ html {
   border-top: 2px solid white;
   border-left: 2px solid white;
   padding-Top: 15px;
-  /* padding-bottom: 20px; */
 }
 
 .navLogo{
