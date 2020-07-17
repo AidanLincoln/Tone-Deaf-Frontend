@@ -238,6 +238,9 @@ html {
   opacity: 0.75;
   /* transition: 0.5s; */
 }
+.pageTitle{
+  
+}
 @media screen and (min-width: 1024px){
   .navLogo{
     position: 'absolute';
@@ -252,6 +255,7 @@ html {
   }
   .scaleLabel{
     font-size: 1.5rem;
+    margin-bottom: 20px;
   }
   .formSelect{
     width: auto;

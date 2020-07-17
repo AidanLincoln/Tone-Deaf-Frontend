@@ -400,7 +400,7 @@ export default class ChordGenerator extends React.Component {
         return(
             <div>
                 <br></br>
-                <h1>Chord Generator</h1>
+                <h1 className='pageTitle'>Chord Generator</h1>
                 <br></br>
                     <div className="container-fluid">
                     <div className="row" style={{height: '120px'}}>
