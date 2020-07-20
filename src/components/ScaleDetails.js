@@ -105,8 +105,6 @@ export default class ScaleDetails extends React.Component {
             scalesNotes.push(scalesNotes[0])
             let scaleKey = this.state.currentScale.scale_name.split(' ')[0]
             return <div>
-                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>
-                <br></br>
                 <h1>{this.state.currentScale.scale_name}</h1>
                 <br></br>
                 <h1>{scalesNotes.toString()}</h1>
@@ -124,7 +122,9 @@ export default class ScaleDetails extends React.Component {
 
     render(){
         return(
-            <div>          
+            <div>  
+                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>  
+                <br></br>      
                 {this.renderScale()}
             </div>
         )

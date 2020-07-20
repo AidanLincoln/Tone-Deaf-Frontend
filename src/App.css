@@ -238,8 +238,21 @@ html {
   opacity: 0.75;
   /* transition: 0.5s; */
 }
-.pageTitle{
-  
+.pianoTL{
+  border-top: 4px solid #ff8888;
+  border-left: 4px solid #ff8888;
+}
+.pianoTR{
+  border-top: 4px solid #ff8888;
+  border-right: 4px solid #da4545;
+}
+.pianoBL{
+  border-bottom: 4px solid #da4545;
+  border-left: 4px solid #ff8888;
+}
+.pianoBR{
+  border-bottom: 4px solid #da4545;
+  border-right: 4px solid #da4545;
 }
 @media screen and (min-width: 1024px){
   .navLogo{
