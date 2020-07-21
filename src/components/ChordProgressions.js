@@ -65,7 +65,6 @@ export default class ChordProgressions extends React.Component {
         api.collections.addChordToProgression(collectionId, null)
         .then((res) => {
             console.log("Chord removed from progression")
-            console.log(res)
         })
         .then(() => {
             this.props.updateUsersChords()
@@ -155,7 +154,7 @@ export default class ChordProgressions extends React.Component {
                     </div>
                 </div>
                 {this.progressionHasChords() ? 
-                <button className="niceButton" style={{position: "relative", top: "-105px"}} onClick={(event) => this.playChordProgression(event)}>Play Chord Progression</button> 
+                <button className="niceButton" style={{position: "relative", top: "-105px", fontSize: "larger"}} onClick={(event) => this.playChordProgression(event)}>Play Chord Progression</button> 
                 : null}<br></br><br></br>
                 <ul style={{position: "relative", top: "-100px", left: "-20px"}}>
                     {this.renderChordProgression()}

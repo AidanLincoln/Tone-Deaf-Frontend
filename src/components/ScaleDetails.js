@@ -107,7 +107,8 @@ export default class ScaleDetails extends React.Component {
             return <div>
                 <h1>{this.state.currentScale.scale_name}</h1>
                 <br></br>
-                <h1>{scalesNotes.toString()}</h1>
+                <h2>Notes:</h2>
+                <h3>{scalesNotes.toString()}</h3>
                 <br></br>
                 <button className="niceButton" onClick={this.playScale}>Play</button>
                 <br></br>

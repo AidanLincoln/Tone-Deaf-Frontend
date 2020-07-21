@@ -15,7 +15,6 @@ export default class CreateAccount extends React.Component {
         api.auth.createUser(newUser).then(res => {
             if (res.hasOwnProperty("user")){
                 console.log("User succesfully created")
-                console.log(res)
             this.setState({error: false})
             this.props.onCreateUser(res);
             this.props.history.push('/')

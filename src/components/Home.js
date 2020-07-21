@@ -6,6 +6,7 @@ export default class Home extends React.Component {
         return(
             <div>
                 <img className="homeLogo" src={Logo}></img>
+                <h4 className="homeDescription">Explore scales, generate chords, and build chord progressions.</h4>
             </div>
 
         )

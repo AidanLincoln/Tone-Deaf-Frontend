@@ -254,6 +254,9 @@ html {
   border-bottom: 4px solid #da4545;
   border-right: 4px solid #da4545;
 }
+.homeDescription{
+  margin-top: 175px;
+}
 @media screen and (min-width: 1024px){
   .navLogo{
     position: 'absolute';
@@ -321,13 +324,18 @@ html {
   .textBackground{
     font-size: 1.5rem;
   }
-
+  .homeDescription{
+    font-size: x-large;
+  }
 }
 @media screen and (min-width: 1600px){
   .navLogo{
     position: 'absolute';
     margin-left: -140px;
     margin-top: -5px;
+  }
+  .homeDescription{
+    font-size: xx-large;
   }
 }
 @media screen and (min-width: 1680px){
