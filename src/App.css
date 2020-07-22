@@ -130,7 +130,7 @@ html {
   background-color: white;
   border: 7px solid #ff5757;
   width: 650px;
-  outline: 3px solid white;
+  outline: 2px solid white;
 }
 
 .formLabel{
@@ -255,7 +255,7 @@ html {
   border-right: 4px solid #da4545;
 }
 .homeDescription{
-  margin-top: 175px;
+  margin-top: 180px;
 }
 @media screen and (min-width: 1024px){
   .navLogo{

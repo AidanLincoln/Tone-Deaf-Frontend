@@ -369,6 +369,189 @@ export default class ChordGenerator extends React.Component {
             })
         })
     }
+    //begin writing new generation algorithm that doesnt allow notes to be 2 semitones apart
+    onGenerate4 = () => {
+        console.log("Creating chord with NEWEST generation algorithm")
+        let genScale;
+        this.props.allScales.forEach((scale) => {
+            if(scale.scale_name === `${this.state.key} ${this.state.scaleType}`){
+                genScale = scale
+            }
+        })
+        this.setState({
+            currentScale: genScale,
+            octaveOneNotes: [],
+            octaveTwoNotes: []
+        },()=> {
+            let notesInScale;
+            let staticNotesInScale;
+            let octaveTwo;
+            api.collections.getNotesInCollection(this.state.currentScale.id)
+            .then(res => {
+                notesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                staticNotesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                this.setState({
+                    currentScaleNotes: notesInScale
+                })
+                octaveTwo = res.notes.map((note)=>{
+                    return note.name
+                })
+                let chord = []
+                const allNotes = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#']
+                console.log(...notesInScale)
+                console.log(...octaveTwo)
+                while(chord.length < this.state.numberOfNotes){
+                   //on every iteration a random octave between 1 or 2 should be picked, and a random index of that array should also be picked
+                   let randomOctave = Math.floor(Math.random() * 2) + 1 
+                   if(randomOctave === 1 && !notesInScale.length){
+                       randomOctave = 2
+                       console.log("switched octave due to empty OC1")
+                   }
+                   if(randomOctave === 2 && !octaveTwo.length){
+                    randomOctave = 1
+                    console.log("switched octave due to empty OC2")
+                    //prevent crash by breaking if there are no more notes to add
+                    if(!notesInScale.length && !octaveTwo.length){
+                        console.log("break")
+                        console.log(notesInScale, octaveTwo)
+                        break
+                    }
+                }
+                   let randomIndex;
+                   if(randomOctave === 1){
+                    notesInScale.forEach((note) => {
+                        chord.forEach(chordNote => {
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                            }
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                            }
+
+                            //remove notes 2 semitones away here
+
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
+                            }
+                            if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])){
+                                notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
+                            }
+                        })
+                       
+                        //if chord contains G#, remove A from notesInScale... vice versa
+                        
+                        if(chord.includes("G#3") && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(chord.includes("A3") && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
+                        }
+
+                        if(chord.includes("G3") && notesInScale.includes("A")){
+                            notesInScale.splice(notesInScale.indexOf("A"), 1)
+                        }
+                        if(chord.includes("A3") && notesInScale.includes("G")){
+                            notesInScale.splice(notesInScale.indexOf("G"), 1)
+                        }
+
+                        if(chord.includes("G#3") && notesInScale.includes("A#")){
+                            notesInScale.splice(notesInScale.indexOf("A#"), 1)
+                        }
+                        if(chord.includes("A#3") && notesInScale.includes("G#")){
+                            notesInScale.splice(notesInScale.indexOf("G#"), 1)
+                        }
+                    })
+                    randomIndex = Math.floor(Math.random() * notesInScale.length)
+                    let noteToAdd = notesInScale[randomIndex]
+                    if(noteToAdd !== undefined){
+                        this.setState((prevState) => ({
+                            octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
+                        }))
+                        console.log(randomIndex)
+                        console.log(notesInScale, "notes in scale")
+                        console.log(noteToAdd)
+                        chord.push(`${noteToAdd}3`)
+                        notesInScale.splice(randomIndex, 1)
+                    }
+                   }
+                   if(randomOctave === 2){
+                    
+                    //remove notes from octave two that are 2 semitones apart from any notes in the chord
+
+                        octaveTwo.forEach((note) => {
+                            chord.forEach(chordNote => {
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                                }
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                                }
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
+                                }
+                                if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])){
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
+                                }
+                            })
+                            //if chord contains G#, remove A from octave two
+                            
+                        
+                            if(chord.includes("G#4") && octaveTwo.includes("A")){
+                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                                console.log("removed A4 (1)")
+                            }
+                            if(chord.includes("A4") && octaveTwo.includes("G#")){
+                                octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
+                                console.log("removed G#4")
+                            }
+                            // also with G and A , maybe G# and A#
+                            if(chord.includes("G4") && octaveTwo.includes("A")){
+                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)
+                                console.log("removed A4")
+                            }
+                            if(chord.includes("A4") && octaveTwo.includes("G")){
+                                octaveTwo.splice(octaveTwo.indexOf("G"), 1)
+                                console.log("removed G4")
+                            }
+                            //G# and A#
+                            if(chord.includes("G#4") && octaveTwo.includes("A#")){
+                                octaveTwo.splice(octaveTwo.indexOf("A#"), 1)
+                                console.log("removed A#4")
+                            }
+                            if(chord.includes("A#4") && octaveTwo.includes("G#")){
+                                octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
+                                console.log("removed G#4")
+                            }
+                        })
+                        randomIndex = Math.floor(Math.random() * octaveTwo.length)
+                        let noteToAdd = octaveTwo[randomIndex]
+                        if(noteToAdd !== undefined){
+                            this.setState((prevState) => ({
+                                octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
+                            }))
+                            console.log(randomIndex)
+                            console.log(octaveTwo, "oct 2")
+                            console.log(noteToAdd)
+                            chord.push(`${noteToAdd}4`)
+                            octaveTwo.splice(randomIndex, 1)   
+                        }
+                    }
+                }
+                console.log(chord)
+                console.log(notesInScale) 
+                console.log(octaveTwo)
+                this.setState({
+                    currentChord: chord,
+                    hasBeenGenerated: true,
+                    hasBeenSaved: false
+                })           
+            })
+        })
+    }
 
 
     onPlay = (event) => {
@@ -411,6 +594,7 @@ export default class ChordGenerator extends React.Component {
                                 <option value="classic">Classic</option>
                                 <option value="jazz">Jazz</option>
                                 <option value="new">New</option>
+                                <option value="newest">Newest</option>
                             </select>
                         </div>
                         <div className="col-2">
@@ -452,7 +636,7 @@ export default class ChordGenerator extends React.Component {
                         <div className="col-2"></div>
                     </div>  
                     </div>     
-                <button className={"niceButton"} onClick={this.state.genAlgo === "classic" ? this.onGenerate2 : this.state.genAlgo === "jazz" ? this.onGenerate : this.onGenerate3}>Generate</button>
+                <button className={"niceButton"} onClick={this.state.genAlgo === "classic" ? this.onGenerate2 : this.state.genAlgo === "jazz" ? this.onGenerate : this.state.genAlgo === "new" ? this.onGenerate3 : this.onGenerate4}>Generate</button>
                 {!!this.state.hasBeenGenerated ? <button className={"niceButton"} onClick={this.onPlay}>Play</button>: null}
                 {!!this.state.hasBeenGenerated && !!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button>: null}
                 <br></br>
