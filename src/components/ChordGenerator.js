@@ -370,6 +370,7 @@ export default class ChordGenerator extends React.Component {
         })
     }
     //begin writing new generation algorithm that doesnt allow notes to be 2 semitones apart
+    //allow a certain amount of notes to be 2 semitones apart, potentially 1 or 2?
     onGenerate4 = () => {
         console.log("Creating chord with NEWEST generation algorithm")
         let genScale;
@@ -422,7 +423,18 @@ export default class ChordGenerator extends React.Component {
                     }
                 }
                    let randomIndex;
+                   let oc1Chord = []
+                   let oc2Chord = []
+                    chord.forEach(note => {
+                        if(note.includes("3")){
+                            oc1Chord.push(note)
+                        }else{
+                            oc2Chord.push(note)
+                        }
+                    })
                    if(randomOctave === 1){
+                    
+                    console.log(...oc1Chord)
                     notesInScale.forEach((note) => {
                         chord.forEach(chordNote => {
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
@@ -431,14 +443,18 @@ export default class ChordGenerator extends React.Component {
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
                             }
+                        })
+                        oc1Chord.forEach(chordNote => { 
 
                             //remove notes 2 semitones away here
 
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
+                                console.log("removed note 2 semitones away")
                             }
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])){
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
+                                console.log("removed note 2 semitones away")
                             }
                         })
                        
@@ -472,7 +488,7 @@ export default class ChordGenerator extends React.Component {
                             octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
                         }))
                         console.log(randomIndex)
-                        console.log(notesInScale, "notes in scale")
+                        console.log(...notesInScale, "notes in scale")
                         console.log(noteToAdd)
                         chord.push(`${noteToAdd}3`)
                         notesInScale.splice(randomIndex, 1)
@@ -481,7 +497,6 @@ export default class ChordGenerator extends React.Component {
                    if(randomOctave === 2){
                     
                     //remove notes from octave two that are 2 semitones apart from any notes in the chord
-
                         octaveTwo.forEach((note) => {
                             chord.forEach(chordNote => {
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
@@ -490,6 +505,9 @@ export default class ChordGenerator extends React.Component {
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
                                 }
+                            })
+                            oc2Chord.forEach(chordNote => {
+                                
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
                                 }
@@ -534,16 +552,16 @@ export default class ChordGenerator extends React.Component {
                                 octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
                             }))
                             console.log(randomIndex)
-                            console.log(octaveTwo, "oct 2")
+                            console.log(...octaveTwo, "oct 2")
                             console.log(noteToAdd)
                             chord.push(`${noteToAdd}4`)
                             octaveTwo.splice(randomIndex, 1)   
                         }
                     }
                 }
+                console.log(...notesInScale, "notes in scale") 
+                console.log(...octaveTwo, "octave 2")
                 console.log(chord)
-                console.log(notesInScale) 
-                console.log(octaveTwo)
                 this.setState({
                     currentChord: chord,
                     hasBeenGenerated: true,
