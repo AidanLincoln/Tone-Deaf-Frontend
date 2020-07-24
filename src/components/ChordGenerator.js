@@ -418,7 +418,7 @@ export default class ChordGenerator extends React.Component {
                     //prevent crash by breaking if there are no more notes to add
                     if(!notesInScale.length && !octaveTwo.length){
                         console.log("break")
-                        console.log(notesInScale, octaveTwo)
+                        
                         break
                     }
                 }
@@ -434,14 +434,22 @@ export default class ChordGenerator extends React.Component {
                     })
                    if(randomOctave === 1){
                     
-                    console.log(...oc1Chord)
+                    
                     notesInScale.forEach((note) => {
                         chord.forEach(chordNote => {
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+
+                                console.log("removed", notesInScale[notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])])
+                                
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                                
                             }
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+
+                                console.log("removed", notesInScale[notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])])
+
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                                
                             }
                         })
                         oc1Chord.forEach(chordNote => { 
@@ -449,12 +457,18 @@ export default class ChordGenerator extends React.Component {
                             //remove notes 2 semitones away here
 
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
+
+                                console.log("removed", notesInScale[notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])])
+
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
-                                console.log("removed note 2 semitones away")
+                                
                             }
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])){
+
+                                console.log("removed", notesInScale[notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])])
+
                                 notesInScale.splice(notesInScale.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
-                                console.log("removed note 2 semitones away")
+                                
                             }
                         })
                        
@@ -487,9 +501,7 @@ export default class ChordGenerator extends React.Component {
                         this.setState((prevState) => ({
                             octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
                         }))
-                        console.log(randomIndex)
-                        console.log(...notesInScale, "notes in scale")
-                        console.log(noteToAdd)
+                        
                         chord.push(`${noteToAdd}3`)
                         notesInScale.splice(randomIndex, 1)
                     }
@@ -500,19 +512,35 @@ export default class ChordGenerator extends React.Component {
                         octaveTwo.forEach((note) => {
                             chord.forEach(chordNote => {
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
+
+                                    console.log("removedoc2", octaveTwo[octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])])
+
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1]), 1)
+                                    
                                 }
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])){
+
+                                    console.log("removedoc2", octaveTwo[octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1])])
+
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 1]), 1)
+                                    
                                 }
                             })
                             oc2Chord.forEach(chordNote => {
                                 
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])){
+
+                                    console.log("removedoc2", octaveTwo[octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2])])
+
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 2]), 1)
+                                    
                                 }
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])){
+
+                                    console.log("removedoc2", octaveTwo[octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])])
+
                                     octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
+                                    
                                 }
                             })
                             //if chord contains G#, remove A from octave two
@@ -520,29 +548,29 @@ export default class ChordGenerator extends React.Component {
                         
                             if(chord.includes("G#4") && octaveTwo.includes("A")){
                                 octaveTwo.splice(octaveTwo.indexOf("A"), 1)
-                                console.log("removed A4 (1)")
+                               
                             }
                             if(chord.includes("A4") && octaveTwo.includes("G#")){
                                 octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
-                                console.log("removed G#4")
+                                
                             }
                             // also with G and A , maybe G# and A#
                             if(chord.includes("G4") && octaveTwo.includes("A")){
                                 octaveTwo.splice(octaveTwo.indexOf("A"), 1)
-                                console.log("removed A4")
+                                
                             }
                             if(chord.includes("A4") && octaveTwo.includes("G")){
                                 octaveTwo.splice(octaveTwo.indexOf("G"), 1)
-                                console.log("removed G4")
+                                
                             }
                             //G# and A#
                             if(chord.includes("G#4") && octaveTwo.includes("A#")){
                                 octaveTwo.splice(octaveTwo.indexOf("A#"), 1)
-                                console.log("removed A#4")
+                                
                             }
                             if(chord.includes("A#4") && octaveTwo.includes("G#")){
                                 octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
-                                console.log("removed G#4")
+                                
                             }
                         })
                         randomIndex = Math.floor(Math.random() * octaveTwo.length)
@@ -551,17 +579,13 @@ export default class ChordGenerator extends React.Component {
                             this.setState((prevState) => ({
                                 octaveTwoNotes: [...prevState.octaveTwoNotes, noteToAdd]
                             }))
-                            console.log(randomIndex)
-                            console.log(...octaveTwo, "oct 2")
-                            console.log(noteToAdd)
+                          
                             chord.push(`${noteToAdd}4`)
                             octaveTwo.splice(randomIndex, 1)   
                         }
                     }
                 }
-                console.log(...notesInScale, "notes in scale") 
-                console.log(...octaveTwo, "octave 2")
-                console.log(chord)
+                
                 this.setState({
                     currentChord: chord,
                     hasBeenGenerated: true,
