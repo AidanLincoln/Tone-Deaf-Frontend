@@ -370,7 +370,6 @@ export default class ChordGenerator extends React.Component {
         })
     }
     //begin writing new generation algorithm that doesnt allow notes to be 2 semitones apart
-    //allow a certain amount of notes to be 2 semitones apart, potentially 1 or 2?
     onGenerate4 = () => {
         console.log("Creating chord with NEWEST generation algorithm")
         let genScale;
@@ -417,8 +416,7 @@ export default class ChordGenerator extends React.Component {
                     console.log("switched octave due to empty OC2")
                     //prevent crash by breaking if there are no more notes to add
                     if(!notesInScale.length && !octaveTwo.length){
-                        console.log("break")
-                        
+                        console.log("break")               
                         break
                     }
                 }
@@ -433,8 +431,7 @@ export default class ChordGenerator extends React.Component {
                         }
                     })
                    if(randomOctave === 1){
-                    
-                    
+                           
                     notesInScale.forEach((note) => {
                         chord.forEach(chordNote => {
                             if(notesInScale.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
@@ -500,15 +497,15 @@ export default class ChordGenerator extends React.Component {
                     if(noteToAdd !== undefined){
                         this.setState((prevState) => ({
                             octaveOneNotes: [...prevState.octaveOneNotes, noteToAdd]
-                        }))
-                        
+                        }))            
                         chord.push(`${noteToAdd}3`)
                         notesInScale.splice(randomIndex, 1)
                     }
                    }
-                   if(randomOctave === 2){
-                    
+                   if(randomOctave === 2){                   
                     //remove notes from octave two that are 2 semitones apart from any notes in the chord
+
+                    //only allow notes to be 2 semitones apart if they are in seperate octaves
                         octaveTwo.forEach((note) => {
                             chord.forEach(chordNote => {
                                 if(octaveTwo.includes(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) - 1])){
@@ -539,38 +536,29 @@ export default class ChordGenerator extends React.Component {
 
                                     console.log("removedoc2", octaveTwo[octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2])])
 
-                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)
-                                    
+                                    octaveTwo.splice(octaveTwo.indexOf(allNotes[allNotes.indexOf(chordNote.substring(0, chordNote.length - 1)) + 2]), 1)                            
                                 }
                             })
-                            //if chord contains G#, remove A from octave two
-                            
-                        
+                            //if chord contains G#, remove A from octave two                      
                             if(chord.includes("G#4") && octaveTwo.includes("A")){
-                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)
-                               
+                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)                            
                             }
                             if(chord.includes("A4") && octaveTwo.includes("G#")){
-                                octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
-                                
+                                octaveTwo.splice(octaveTwo.indexOf("G#"), 1)                            
                             }
                             // also with G and A , maybe G# and A#
                             if(chord.includes("G4") && octaveTwo.includes("A")){
-                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)
-                                
+                                octaveTwo.splice(octaveTwo.indexOf("A"), 1)                               
                             }
                             if(chord.includes("A4") && octaveTwo.includes("G")){
-                                octaveTwo.splice(octaveTwo.indexOf("G"), 1)
-                                
+                                octaveTwo.splice(octaveTwo.indexOf("G"), 1)                           
                             }
                             //G# and A#
                             if(chord.includes("G#4") && octaveTwo.includes("A#")){
                                 octaveTwo.splice(octaveTwo.indexOf("A#"), 1)
-                                
                             }
                             if(chord.includes("A#4") && octaveTwo.includes("G#")){
                                 octaveTwo.splice(octaveTwo.indexOf("G#"), 1)
-                                
                             }
                         })
                         randomIndex = Math.floor(Math.random() * octaveTwo.length)

@@ -79,10 +79,10 @@ export default class MyChords extends React.Component {
                                 <div className="textBackground" style={{padding: "20px"}}>
                                     <h3>Add to a chord progression</h3>
                                     <br></br>
-                                    <button className="niceButton" onClick={() => this.addChordToProgression(chord.collection_info.id, 1)}>1</button>                              
-                                    <button className="niceButton" onClick={() => this.addChordToProgression(chord.collection_info.id, 2)}>2</button>                                        
-                                    <button className="niceButton" onClick={() => this.addChordToProgression(chord.collection_info.id, 3)}>3</button>                    
-                                    <button className="niceButton" onClick={() => this.addChordToProgression(chord.collection_info.id, 4)}>4</button>
+                                    <button className="niceButton" style={chord.collection_info.chord_progression === 1 ? {backgroundColor: "white", color: "black"} : null} onClick={() => this.addChordToProgression(chord.collection_info.id, 1)}>1</button>                              
+                                    <button className="niceButton" style={chord.collection_info.chord_progression === 2 ? {backgroundColor: "white", color: "black"} : null} onClick={() => this.addChordToProgression(chord.collection_info.id, 2)}>2</button>                                        
+                                    <button className="niceButton" style={chord.collection_info.chord_progression === 3 ? {backgroundColor: "white", color: "black"} : null} onClick={() => this.addChordToProgression(chord.collection_info.id, 3)}>3</button>                    
+                                    <button className="niceButton" style={chord.collection_info.chord_progression === 4 ? {backgroundColor: "white", color: "black"} : null} onClick={() => this.addChordToProgression(chord.collection_info.id, 4)}>4</button>
                                 </div>                                           
                             </div>
                         </div>
