@@ -58,6 +58,17 @@ export default class Navbar extends React.Component {
                 >Scales
                 </NavLink>
 
+                <NavLink
+                className="navLink"
+                to="/piano"
+                exact
+                style={link}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
+                >Piano
+                </NavLink>
+
                 {/* Only render if user is not logged in */}
                 {!localStorage.getItem('token') ?
                 <NavLink

@@ -12,6 +12,7 @@ import Scales from './components/Scales'
 import MyChords from './components/MyChords'
 import ChordProgressions from './components/ChordProgressions'
 import ScaleDetails from './components/ScaleDetails'
+import ChordCreator from './components/ChordCreator'
 
 export default class App extends React.Component {
   constructor() {
@@ -240,6 +241,11 @@ export default class App extends React.Component {
               exact
               path="/my-chords"
               render={ props => <MyChords {...props} updateUsersChords={this.updateUsersChords} sortNotes={this.sortNotes} usersChords={this.state.usersChords} user={this.state.auth} />}/>
+
+            <Route  
+              exact
+              path="/piano"
+              render={ props => <ChordCreator {...props} allScales={this.state.scales} />}/>
 
           </div>
           </Router>
