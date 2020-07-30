@@ -244,7 +244,7 @@ export default class App extends React.Component {
 
             <Route  
               exact
-              path="/piano"
+              path="/chord-creator"
               render={ props => <ChordCreator {...props} allScales={this.state.scales} />}/>
 
           </div>

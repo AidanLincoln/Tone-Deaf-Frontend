@@ -46,6 +46,17 @@ export default class Navbar extends React.Component {
                 }}
                 >Chord Generator
                 </NavLink>
+
+                <NavLink
+                className="navLink"
+                to="/chord-creator"
+                exact
+                style={link}
+                activeStyle={{
+                    fontWeight: 'bolder'
+                }}
+                >Chord Creator
+                </NavLink>
                 
                 <NavLink
                 className="navLink"
@@ -56,17 +67,6 @@ export default class Navbar extends React.Component {
                     fontWeight: 'bolder'
                 }}
                 >Scales
-                </NavLink>
-
-                <NavLink
-                className="navLink"
-                to="/piano"
-                exact
-                style={link}
-                activeStyle={{
-                    fontWeight: 'bolder'
-                }}
-                >Piano
                 </NavLink>
 
                 {/* Only render if user is not logged in */}

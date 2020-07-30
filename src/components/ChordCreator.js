@@ -36,9 +36,6 @@ export default class ChordCreator extends React.Component {
     orderKeys = () => {
         const allNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         let notesToDisplay = []
-
-        // console.log()
-        // let i = allNotes.indexOf(this.props.scaleKey)
         let i = 0
         while(notesToDisplay.length < 12){
             if(i < allNotes.length){
@@ -109,15 +106,7 @@ export default class ChordCreator extends React.Component {
             style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
             key={note}>
             </div>
-        })
-        // notes.forEach((note) => {
-        //     return <div className="col-1" onClick={() => this.keyClick(note)}
-        //     style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
-        //     key={note}>
-        //     </div>
-        // })
-            
-    
+        }) 
     }
 
     mapOc2 = () => {
@@ -129,12 +118,6 @@ export default class ChordCreator extends React.Component {
             key={note}>
             </div>
         })
-        // notes.forEach((note) => {
-        //     return <div className="col-1" onClick={() => this.keyClick(note)}
-        //     style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
-        //     key={note}>
-        //     </div>
-        // })
     }
 
     keyClick = (note) => {
@@ -156,10 +139,39 @@ export default class ChordCreator extends React.Component {
         polySynth.triggerAttackRelease(noteToPlay, '0.5');
     }
 
+    onPlayChord = () => {
+        let activeKeys = Object.keys(this.state.activeKeys)
+        let chord = []
+        activeKeys.forEach((key) => {
+            if(this.state.activeKeys[key] === true){
+                if(key.includes('2')){
+                    chord.push(`${key.slice(0, -1)}4`)
+                }else{
+                    chord.push(`${key}3`)
+                }
+            }
+        })
+        if(chord.length){
+            const polySynth = new PolySynth({
+                polyphony: 8,
+                volume : -7 ,
+                detune : 0 ,
+                voice : Synth
+            }).toMaster();
+
+            polySynth.triggerAttackRelease(chord, '2.5');
+        }
+    }
+
     render(){
         return(
-            <div style={{marginTop: "20px"}}>
-                <br></br><br></br>
+            <div style={{marginTop: "20px"}}>   
+            <br></br>
+            <h1 className='pageTitle'>Chord Creator</h1>
+                <br></br>
+                <div>
+                    <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
+                </div>
                 <div className="container-fluid">       
                     <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
                         <div className="col-6">
@@ -179,7 +191,7 @@ export default class ChordCreator extends React.Component {
                             </div>
                         </div>
                     </div>   
-                </div> 
+                </div>         
             </div>
         )
     }
