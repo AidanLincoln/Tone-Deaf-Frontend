@@ -1,4 +1,5 @@
 import React from 'react'
+import { PolySynth, Synth } from 'tone'
 
 export default class ChordCreator extends React.Component {
     constructor(){
@@ -51,7 +52,7 @@ export default class ChordCreator extends React.Component {
         return notesToDisplay
     }
 
-    mapScaleToKeys = () => {
+    mapScaleToKeysOc1 = () => {
         const colorObj = {
             'C': 'white',
             'C#': 'black',
@@ -67,58 +68,114 @@ export default class ChordCreator extends React.Component {
             'B': 'white'
         }   
         return this.orderKeys().map((note, index) => {
-            return <div className="col-1"
+            let octave = 1
+            return <div className="col-1" onClick={() => this.playNote(note, octave)}
                 style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white"}}
                 key={index}>{note}
             </div>
         })
     }
 
-    mapActiveKeys = (octave) => {
-        let keyPressed = {
-            'C': false,
-            'C#': false,
-            'D': false,
-            'D#': false,
-            'E': false,
-            'F': false,
-            'F#': false,
-            'G': false,
-            'G#': false,
-            'A': false,
-            'A#': false,
-            'B': false
-        }
-        octave.forEach((note) => {
-            keyPressed[note] = true
-        })
+    mapScaleToKeysOc2 = () => {
+        const colorObj = {
+            'C2': 'white',
+            'C#2': 'black',
+            'D2': 'white',
+            'D#2': 'black',
+            'E2': 'white',
+            'F2': 'white',
+            'F#2': 'black',
+            'G2': 'white',
+            'G#2': 'black',
+            'A2': 'white',
+            'A#2': 'black',
+            'B2': 'white'
+        }   
         return this.orderKeys().map((note, index) => {
-            return <div className="col-1"
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: keyPressed[note] === false ? "0.5" : "1"}}
-            key={index}>
+            let octave = 2
+            let noteOc = `${note}2`
+            return <div className="col-1" onClick={() => this.playNote(note, octave)}
+                style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: colorObj[noteOc], color: colorObj[noteOc] === "white" ? "black" : "white"}}
+                key={note}>{note}
             </div>
         })
     }
 
+    mapOc1 = () => {
+        const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
+        return notes.map((note, index) => {
+            return <div className="col-1" onClick={() => this.keyClick(note)}
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+            key={note}>
+            </div>
+        })
+        // notes.forEach((note) => {
+        //     return <div className="col-1" onClick={() => this.keyClick(note)}
+        //     style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+        //     key={note}>
+        //     </div>
+        // })
+            
+    
+    }
+
+    mapOc2 = () => {
+        const notes = ["C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2"]
+
+        return notes.map((note, index) => {
+            return <div className="col-1" onClick={() => this.keyClick(note)}
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+            key={note}>
+            </div>
+        })
+        // notes.forEach((note) => {
+        //     return <div className="col-1" onClick={() => this.keyClick(note)}
+        //     style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+        //     key={note}>
+        //     </div>
+        // })
+    }
+
+    keyClick = (note) => {
+        let newObj = this.state.activeKeys
+        newObj[note] = !newObj[note]
+        this.setState({activeKeys: newObj})
+    }
+
+    playNote = (note, octave) => {
+        const polySynth = new PolySynth({
+            polyphony: 8,
+            volume : -7 ,
+            detune : 0 ,
+            voice : Synth
+        }).toMaster();
+
+        let noteToPlay = `${note}${octave + 2}`
+        
+        polySynth.triggerAttackRelease(noteToPlay, '0.5');
+    }
+
     render(){
         return(
-            <div style={{marginTop: "-15px"}}>
+            <div style={{marginTop: "20px"}}>
+                <br></br><br></br>
                 <div className="container-fluid">       
                     <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
                         <div className="col-6">
                             <div className="row pianoTL">
-                                {this.mapScaleToKeys()}
+                                {this.mapScaleToKeysOc1()}
                             </div>
                             <div className="row pianoBL" style={{marginTop: "0px"}}>
-                                {/* {this.mapActiveKeys(this.props.octaveOne)} */}
+                                {this.mapOc1()}
                             </div>
                         </div>
                         <div className="col-6">
                             <div className="row pianoTR">
-                                {this.mapScaleToKeys()}
+                                {this.mapScaleToKeysOc2()}
                             </div>
                             <div className="row pianoBR" style={{marginTop: "0px"}}>
-                                {/* {this.mapActiveKeys(this.props.octaveTwo)} */}
+                                {this.mapOc2()}            
                             </div>
                         </div>
                     </div>   
