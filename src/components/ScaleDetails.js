@@ -4,6 +4,18 @@ import { PolySynth, Synth } from 'tone'
 import Piano from './Piano'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const polySynth = new PolySynth({
+    polyphony: 8,
+    volume : -7 ,
+    detune : 0 ,
+    voice : Synth
+}).toMaster();
+polySynth.set({
+    "envelope" : {
+        "attack" : 0.005,
+    }
+});
+
 export default class ScaleDetails extends React.Component {
     constructor(){
         super()
@@ -82,13 +94,6 @@ export default class ScaleDetails extends React.Component {
             assignedNotes.push(`${assignedNotes[0].substr(0,1)}4`)
         }
         console.log(assignedNotes)
-        
-        const polySynth = new PolySynth({
-            polyphony: 8,
-            volume : -7 ,
-            detune : 0 ,
-            voice : Synth
-        }).toMaster();
 
         assignedNotes.forEach((note, i) => {      
             setTimeout(() => {

@@ -4,6 +4,18 @@ import { PolySynth, Synth } from 'tone'
 import Piano from './Piano'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const polySynth = new PolySynth({
+    polyphony: 8,
+    volume : -7 ,
+    detune : 0 ,
+    voice : Synth
+    }).toMaster();
+    polySynth.set({
+        "envelope" : {
+            "attack" : 0.005,
+        }
+    });
+
 export default class ChordGenerator extends React.Component {
     constructor(){
         super()
@@ -586,12 +598,6 @@ export default class ChordGenerator extends React.Component {
 
     onPlay = (event) => {
         event.preventDefault()
-        const polySynth = new PolySynth({
-            polyphony: 8,
-            volume : -7 ,
-            detune : 0 ,
-            voice : Synth
-            }).toMaster();
         console.log(`playing: ${this.state.currentChord}`)
         polySynth.triggerAttackRelease(this.state.currentChord, '2.5');
     }

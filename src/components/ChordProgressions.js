@@ -9,6 +9,11 @@ const polySynth = new PolySynth({
     detune : 0 ,
     voice : Synth
 }).toMaster();
+polySynth.set({
+	"envelope" : {
+        "attack" : 0.005,
+	}
+});
 
 export default class ChordProgressions extends React.Component {
     constructor(props){

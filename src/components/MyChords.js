@@ -3,6 +3,18 @@ import {api} from '../services/api'
 import { PolySynth, Synth } from 'tone'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const polySynth = new PolySynth({
+    polyphony: 8,
+    volume : -7 ,
+    detune : 0 ,
+    voice : Synth
+    }).toMaster();
+    polySynth.set({
+        "envelope" : {
+            "attack" : 0.005,
+        }
+    });
+
 export default class MyChords extends React.Component {
     
     componentDidMount(){
@@ -28,12 +40,6 @@ export default class MyChords extends React.Component {
         })
         console.log('Configured note array')
         console.log(configNoteArray)
-        const polySynth = new PolySynth({
-            polyphony: 8,
-            volume : -7 ,
-            detune : 0 ,
-            voice : Synth
-            }).toMaster();
         polySynth.triggerAttackRelease(configNoteArray, "2.8");
     }
     

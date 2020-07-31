@@ -1,6 +1,18 @@
 import React from 'react'
 import { PolySynth, Synth } from 'tone'
 
+const polySynth = new PolySynth({
+    polyphony: 8,
+    volume : -7 ,
+    detune : 0 ,
+    voice : Synth
+}).toMaster();
+polySynth.set({
+	"envelope" : {
+        "attack" : 0.005,
+	}
+});
+
 export default class ChordCreator extends React.Component {
     constructor(){
         super()
@@ -102,7 +114,7 @@ export default class ChordCreator extends React.Component {
         const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
         return notes.map((note, index) => {
-            return <div className="col-1" onClick={() => this.keyClick(note)}
+            return <div className="col-1" onClick={() => this.noteToggle(note)}
             style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
             key={note}>
             </div>
@@ -113,27 +125,20 @@ export default class ChordCreator extends React.Component {
         const notes = ["C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2"]
 
         return notes.map((note, index) => {
-            return <div className="col-1" onClick={() => this.keyClick(note)}
+            return <div className="col-1" onClick={() => this.noteToggle(note)}
             style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
             key={note}>
             </div>
         })
     }
 
-    keyClick = (note) => {
+    noteToggle = (note) => {
         let newObj = this.state.activeKeys
         newObj[note] = !newObj[note]
         this.setState({activeKeys: newObj})
     }
 
     playNote = (note, octave) => {
-        const polySynth = new PolySynth({
-            polyphony: 8,
-            volume : -7 ,
-            detune : 0 ,
-            voice : Synth
-        }).toMaster();
-
         let noteToPlay = `${note}${octave + 2}`
         
         polySynth.triggerAttackRelease(noteToPlay, '0.5');
@@ -152,13 +157,6 @@ export default class ChordCreator extends React.Component {
             }
         })
         if(chord.length){
-            const polySynth = new PolySynth({
-                polyphony: 8,
-                volume : -7 ,
-                detune : 0 ,
-                voice : Synth
-            }).toMaster();
-
             polySynth.triggerAttackRelease(chord, '2.5');
         }
     }
@@ -201,7 +199,7 @@ export default class ChordCreator extends React.Component {
                 <br></br>
                 <div>
                     <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
-                    
+
                     <button className={"niceButton"} onClick={this.onResetPiano}>Reset Piano</button>
                 </div>
                 <div className="container-fluid">       
