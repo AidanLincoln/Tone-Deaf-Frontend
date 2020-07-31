@@ -162,6 +162,36 @@ export default class ChordCreator extends React.Component {
             polySynth.triggerAttackRelease(chord, '2.5');
         }
     }
+    onResetPiano = () => {
+        this.setState({
+            activeKeys: {
+                'C': false,
+                'C#': false,
+                'D': false,
+                'D#': false,
+                'E': false,
+                'F': false,
+                'F#': false,
+                'G': false,
+                'G#': false,
+                'A': false,
+                'A#': false,
+                'B': false,
+                'C2': false,
+                'C#2': false,
+                'D2': false,
+                'D#2': false,
+                'E2': false,
+                'F2': false,
+                'F#2': false,
+                'G2': false,
+                'G#2': false,
+                'A2': false,
+                'A#2': false,
+                'B2': false
+            }
+        })
+    }
 
     render(){
         return(
@@ -171,6 +201,8 @@ export default class ChordCreator extends React.Component {
                 <br></br>
                 <div>
                     <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
+                    
+                    <button className={"niceButton"} onClick={this.onResetPiano}>Reset Piano</button>
                 </div>
                 <div className="container-fluid">       
                     <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
