@@ -42,7 +42,8 @@ export default class ChordCreator extends React.Component {
                 'A2': false,
                 'A#2': false,
                 'B2': false
-            }
+            },
+            hasBeenSaved: false
         }
     }
     orderKeys = () => {
@@ -134,13 +135,21 @@ export default class ChordCreator extends React.Component {
 
     noteToggle = (note) => {
         let newObj = this.state.activeKeys
+        let noteToPlay = ''
+        if(note.includes('2')){
+            noteToPlay = `${note.slice(0, -1)}4`
+        }else{
+            noteToPlay = `${note}3`
+        }
+        if(newObj[note] === false){
+            polySynth.triggerAttackRelease(noteToPlay, '0.5');
+        }
         newObj[note] = !newObj[note]
-        this.setState({activeKeys: newObj})
+        this.setState({activeKeys: newObj, hasBeenSaved: false})
     }
 
     playNote = (note, octave) => {
         let noteToPlay = `${note}${octave + 2}`
-        
         polySynth.triggerAttackRelease(noteToPlay, '0.5');
     }
 
@@ -187,8 +196,30 @@ export default class ChordCreator extends React.Component {
                 'A2': false,
                 'A#2': false,
                 'B2': false
+            },
+            hasBeenSaved: false
+        })
+    }
+
+    handleSave = () => {
+        let activeKeys = Object.keys(this.state.activeKeys)
+        let chord = {
+            octave_one: [],
+            octave_two: []
+        }
+        activeKeys.forEach((key) => {
+            if(this.state.activeKeys[key] === true){
+                if(key.includes('2')){
+                    chord.octave_two.push(key)
+                }else{
+                    chord.octave_one.push(key)
+                }
             }
         })
+        if((!!chord.octave_one.length || !!chord.octave_two.length) && !!this.props.user.id){
+            this.props.saveChord(chord, "Unknown")
+        }
+        this.setState({hasBeenSaved: true})
     }
 
     render(){
@@ -199,7 +230,7 @@ export default class ChordCreator extends React.Component {
                 <br></br>
                 <div>
                     <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
-
+        {!!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button> : null}
                     <button className={"niceButton"} onClick={this.onResetPiano}>Reset Piano</button>
                 </div>
                 <div className="container-fluid">       

@@ -245,7 +245,7 @@ export default class App extends React.Component {
             <Route  
               exact
               path="/chord-creator"
-              render={ props => <ChordCreator {...props} allScales={this.state.scales} />}/>
+              render={ props => <ChordCreator {...props} allScales={this.state.scales} user={this.state.auth.user} saveChord={this.postChord}/>}/>
 
           </div>
           </Router>
