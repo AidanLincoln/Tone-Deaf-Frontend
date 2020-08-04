@@ -1,5 +1,6 @@
 import React from 'react'
 import { PolySynth, Synth } from 'tone'
+import { api } from '../services/api'
 
 const polySynth = new PolySynth({
     polyphony: 8,
@@ -207,19 +208,44 @@ export default class ChordCreator extends React.Component {
             octave_one: [],
             octave_two: []
         }
+        let chordArray = []
         activeKeys.forEach((key) => {
             if(this.state.activeKeys[key] === true){
                 if(key.includes('2')){
                     chord.octave_two.push(key)
+                    chordArray.push(key.slice(0, -1))
                 }else{
                     chord.octave_one.push(key)
+                    chordArray.push(key)
                 }
             }
         })
+        let detectedScale = this.detectScale(chordArray)
         if((!!chord.octave_one.length || !!chord.octave_two.length) && !!this.props.user.id){
-            this.props.saveChord(chord, "Unknown")
+            this.props.saveChord(chord, detectedScale)
+            console.log("saved")
+            this.setState({hasBeenSaved: true})
         }
-        this.setState({hasBeenSaved: true})
+    }
+    detectScale = (notes) => {
+        let detectedScale = "Unknown"
+        let scaleList = this.props.allScales
+        for(let i = 0; i < scaleList.length; i++){
+            console.log(scaleList[i])
+            api.collections.getNotesInCollection(scaleList[i].id)
+            .then(res => {
+                let notesInScale = res.notes.map((note)=>{
+                    return note.name
+                })
+                if(notes.every(val => notesInScale.includes(val))){
+                    detectedScale = scaleList[i].scale_name
+                }
+            })
+            if(detectedScale !== "Unknown"){
+                break
+            }
+        }       
+        return detectedScale
     }
 
     render(){
