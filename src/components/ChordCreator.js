@@ -13,6 +13,7 @@ polySynth.set({
         "attack" : 0.005,
 	}
 });
+// let scaleNoteArray = []
 
 export default class ChordCreator extends React.Component {
     constructor(){
@@ -47,6 +48,19 @@ export default class ChordCreator extends React.Component {
             hasBeenSaved: false
         }
     }
+    // componentDidMount = () => {
+    //     let scaleList = this.props.allScales
+    //     for(let i = 0; i < scaleList.length; i++){
+    //         api.collections.getNotesInCollection(scaleList[i].id)
+    //         .then(res => {
+    //             let notesInScale = res.notes.map((note)=>{
+    //                 return note.name
+    //             })
+    //             scaleNoteArray.push(notesInScale)
+    //         })
+    //     }
+    // }
+
     orderKeys = () => {
         const allNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         let notesToDisplay = []
@@ -227,24 +241,32 @@ export default class ChordCreator extends React.Component {
             this.setState({hasBeenSaved: true})
         }
     }
-    detectScale = (notes) => {
-        let detectedScale = "Unknown"
-        let scaleList = this.props.allScales
-        for(let i = 0; i < scaleList.length; i++){
-            console.log(scaleList[i])
-            api.collections.getNotesInCollection(scaleList[i].id)
+    getScaleNotes = (scaleId) => {
+        const scaleList = this.props.allScales
+        let scaleNoteList = []
+        let notesInScale;
+            api.collections.getNotesInCollection(scaleId)
             .then(res => {
-                let notesInScale = res.notes.map((note)=>{
+                notesInScale = res.notes.map((note)=>{
                     return note.name
                 })
-                if(notes.every(val => notesInScale.includes(val))){
-                    detectedScale = scaleList[i].scale_name
-                }
             })
-            if(detectedScale !== "Unknown"){
+        return notesInScale
+    }
+    detectScale = (notes) => {
+        
+        
+        let detectedScale = "Unknown"
+        const scaleList = this.props.allScales
+        let notesInScale;
+        for(let i = 0; i < scaleList.length; i++){
+            if(notes.every(val => scaleNoteArray[i].includes(val))){
+                detectedScale = scaleList[i].scale_name
+                console.log(notesInScale)
                 break
             }
         }       
+        console.log(scaleNoteArray)
         return detectedScale
     }
 
