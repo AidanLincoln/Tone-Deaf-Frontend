@@ -140,57 +140,6 @@ export default class App extends React.Component {
     })
     return sortedNotes
   } 
-//consider destroying this
-  // sortChordNotes = (notes, scaleName) => {
-  //   const allNoteArray = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E','F', 'F#', 'G', 'G#', 'A2', 'A#2', 'B2', 'C2', 'C#2', 'D2', 'D#2', 'E2','F2', 'F#2', 'G2', 'G#2']
-  //   let chordSort = []
-  //   let abcSort = this.sortNotes(notes)
-  //   let octaveOne = []
-  //   let octaveTwo = []
-  //   abcSort.forEach((note) => {
-  //     if(note.includes('2')){
-  //       octaveTwo.push(note.substr(1))
-  //     }else{
-  //       octaveOne.push(note.substr(1))
-  //     }
-  //   })
-  //   let rootOfScale = ''
-  //   if(scaleName.includes('#')){
-  //     rootOfScale = scaleName.substr(0,2)
-  //   }else{
-  //     rootOfScale = scaleName.substr(0,1)
-  //   }
-  //   // console.log(rootOfScale)
-  //   // console.log(octaveOne)
-  //   // console.log(octaveTwo)
-  //   let firstNotes = []
-  //   let lastNotes = []
-  //   octaveOne.forEach((note) => {
-  //     if(allNoteArray.indexOf(rootOfScale) <= allNoteArray.indexOf(note)){
-  //       firstNotes.push(note)
-  //     }else{
-  //       lastNotes.push(note)
-  //     }
-  //   })
-  //   chordSort.push(...firstNotes)
-  //   chordSort.push(...lastNotes)
-
-  //   firstNotes = []
-  //   lastNotes = []
-  //   octaveTwo.forEach((note) => {
-  //     if(allNoteArray.indexOf(`${rootOfScale}2`) <= allNoteArray.indexOf(note)){
-  //       firstNotes.push(note)
-  //     }else{
-  //       lastNotes.push(note)
-  //     }
-  //   })
-  //   chordSort.push(...firstNotes)
-  //   chordSort.push(...lastNotes)
-  //   console.log(chordSort)
-  //   return chordSort
-  // }
-
-
 
   render(){
     return (

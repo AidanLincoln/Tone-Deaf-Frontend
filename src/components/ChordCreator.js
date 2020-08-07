@@ -228,31 +228,24 @@ export default class ChordCreator extends React.Component {
             this.setState({hasBeenSaved: true})
         }
     }
-    getScaleNotes = (scaleId) => {
-        const scaleList = this.props.allScales
-        let scaleNoteList = []
-        let notesInScale;
-            api.collections.getNotesInCollection(scaleId)
-            .then(res => {
-                notesInScale = res.notes.map((note)=>{
-                    return note.name
-                })
-            })
-        return notesInScale
-    }
+
     detectScale = (notes) => {
         let detectedScale = "Unknown"
         const scaleList = this.props.allScales
-        const scaleNoteArray = [["C","D","E","F","G","A","B"],["D","E","F#","G","A","B","C#"],["C#","D#","F","F#","G#","A#","C"],["E","F#","G#","A","B","C#","D#"],["F","G","A","A#","C","D","E"],["A#","C","D","D#","F","G","G#"],["A#","B","C#","D#","F","F#","G#"],["G#","A#","C","C#","D#","F","G"],["G","A","B","C","D","E","F#"],["A","B","C#","D","E","F#","G#"],["A#","C","D","D#","F","G","A"],["B","C#","D#","E","F#","G#","A#"],["C","D","D#","F","G","G#","A#"],["D","E","F","G","A","A#","C"],["C#","D#","E","F#","G#","A","B"],["A#","B","C#","D#","F","F#","G#"],["E","F#","G","A","B","C","D"],["F","G","G#","A#","C","C#","D#"],["A","B","C#","D","E","F#","G#"],["G","A","A#","C","D","D#","F"],["G#","A#","B","C#","D#","E","F#"],["A","B","C","D","E","F","G"],["A#","C","C#","D#","F","F#","G#"],["B","C#","D","E","F#","G","A"],["C","D#","F","G","A#"],["C#","E","F#","G#","B"],["D","F","G","A","C"],["E","G","A","B","D"],["D#","F#","G#","A#","C#"],["F#","A","B","C#","E"],["G","A#","C","D","F"],["G#","B","C#","D#","F#"],["F","G#","A#","C","D#"],["A","C","D","E","G"],["A#","C#","D#","F","G#"],["B","D","E","F#","A"],["C","D","E","G","A"],["C#","D#","F","G#","A#"],["D#","F","G","A#","C"],["D","E","F#","A","B"],["E","F#","G#","B","C#"],["F","G","A","C","D"],["F#","G#","A#","C#","D#"],["G#","A#","C","D#","F"],["A","B","C#","E","F#"],["A#","C","D","F","G"],["G","A","B","D","E"],["B","C#","D#","F#","G#"]]
-        let notesInScale;
+        console.log(scaleList)
+        let array = [] 
+        
+        const scaleNoteArray = [["C","D","E","F","G","A","B"],["C#","D#","F","F#","G#","A#","C"],["D","E","F#","G","A","B","C#"],["D#","F","G","G#","A#","C","D"],["E","F#","G#","A","B","C#","D#"],["F","G","A","A#","C","D","E"],["F#","G#","A#","B","C#","D#","F"],["G","A","B","C","D","E","F#"],["G#","A#","C","C#","D#","F","G"],["A","B","C#","D","E","F#","G#"],["A#","C","D","D#","F","G","A"],["B","C#","D#","E","F#","G#","A#"],["C","D","D#","F","G","G#","A#"],["C#","D#","E","F#","G#","A","B"],["D","E","F","G","A","A#","C"],["D#","F","F#","G#","A#","B","C#"],["E","F#","G","A","B","C","D"],["F","G","G#","A#","C","C#","D#"],["F#","G#","A","B","C#","D","E"],["G","A","A#","C","D","D#","F"],["G#","A#","B","C#","D#","E","F#"],["A","B","C","D","E","F","G"],["A#","C","C#","D#","F","F#","G#"],["B","C#","D","E","F#","G","A"],["C","D#","F","G","A#"],["C#","E","F#","G#","B"],["D","F","G","A","C"],["D#","F#","G#","A#","C#"],["E","G","A","B","D"],["F","G#","A#","C","D#"],["F#","A","B","C#","E"],["G","A#","C","D","F"],["G#","B","C#","D#","F#"],["A","C","D","E","G"],["A#","C#","D#","F","G#"],["B","D","E","F#","A"],["C","D","E","G","A"],["C#","D#","F","G#","A#"],["D","E","F#","A","B"],["D#","F","G","A#","C"],["E","F#","G#","B","C#"],["F","G","A","C","D"],["F#","G#","A#","C#","D#"],["G","A","B","D","E"],["G#","A#","C","D#","F"],["A","B","C#","E","F#"],["A#","C","D","F","G"],["B","C#","D#","F#","G#"]]
+    
         for(let i = 0; i < scaleList.length; i++){
             if(notes.every(val => scaleNoteArray[i].includes(val))){
+                console.log(scaleList)
+                console.log(notes)
+                console.log(scaleNoteArray[i])
                 detectedScale = scaleList[i].scale_name
-                console.log(notesInScale)
                 break
             }
         }       
-        console.log(scaleNoteArray)
         return detectedScale
     }
 
