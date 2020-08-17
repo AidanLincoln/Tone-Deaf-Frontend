@@ -254,7 +254,7 @@ export default class ChordCreator extends React.Component {
             <div style={{marginTop: "20px"}}>   
             <br></br>
             <h1 className='pageTitle'>Chord Creator</h1>
-                <br></br>
+                <br></br><br></br>
                 <div>
                     <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
         {!!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button> : null}
