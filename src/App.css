@@ -95,6 +95,8 @@ html {
   text-align:center;
   transition: all 0.2s;
   font-family: 'Montserrat', sans-serif;
+  position: relative;
+  z-index: 1;
 }
 .niceButton:hover{
   color:#000000;
@@ -257,12 +259,43 @@ html {
 .homeDescription{
   margin-top: 180px;
 }
+.pageTitle {
+  position: relative;
+  z-index: 1;
+}
+.particles {
+  position: fixed;
+  right: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+@media screen and (max-width: 1280px){
+  .navbar .navLink {
+    font-size: 1.5rem;
+    position: relative;
+    top: 2px;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .navbar .navLink {
+    font-size: large;
+    position: relative;
+    top: 7px;
+  }
+
+}
+
 @media screen and (min-width: 1024px){
   .navLogo{
     position: 'absolute';
     margin-left: 340px;
     margin-top: 5px;
   }
+
   .formLabel{
     font-size: 1rem;
   }
@@ -327,6 +360,9 @@ html {
   .homeDescription{
     font-size: x-large;
   }
+  .navbar .navLink {
+    font-size: 1.6rem;
+  }
 }
 @media screen and (min-width: 1600px){
   .navLogo{
@@ -336,6 +372,9 @@ html {
   }
   .homeDescription{
     font-size: xx-large;
+  }
+  .navbar .navLink {
+    font-size: 1.8rem;
   }
 }
 @media screen and (min-width: 1680px){
@@ -366,5 +405,7 @@ html {
   .textBackground{
     font-size: 1.6rem;
   }
-
+  .navbar .navLink {
+    font-size: 1.9rem;
+  }
 }

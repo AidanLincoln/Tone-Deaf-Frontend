@@ -14,6 +14,8 @@ import ChordProgressions from './components/ChordProgressions'
 import ScaleDetails from './components/ScaleDetails'
 import ChordCreator from './components/ChordCreator'
 
+import Particles from 'react-particles-js';
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -145,11 +147,24 @@ export default class App extends React.Component {
     return (
         <div className="App">
           <Router>
+
+          <Particles 
+            className="particles"
+            params={{ 
+              particles: { 
+                number: { 
+                  value: 100, 
+                density: { 
+                  enable: true, 
+                  value_area: 1200, 
+                } 
+              }, 
+            }, 
+          }}/> 
           <header className="App-header">
             <Navbar user={this.state.auth.user} onSignOut={this.signOut}/>
           </header>
           <div className = "main">
-
             <Route
               exact
               path="/scales/:scale_name"
