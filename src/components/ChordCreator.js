@@ -118,7 +118,7 @@ export default class ChordCreator extends React.Component {
 
         return notes.map((note, index) => {
             return <div className="col-1" onClick={() => this.noteToggle(note)}
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: this.state.activeKeys[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={note}>
             </div>
         }) 
@@ -129,7 +129,7 @@ export default class ChordCreator extends React.Component {
 
         return notes.map((note, index) => {
             return <div className="col-1" onClick={() => this.noteToggle(note)}
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: this.state.activeKeys[note] === false ? "0.5" : "1"}}
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: this.state.activeKeys[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={note}>
             </div>
         })

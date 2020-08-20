@@ -65,7 +65,7 @@ export default class Piano extends React.Component {
         })
         return this.orderKeys().map((note, index) => {
             return <div className="col-1"
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: "#ffde59", opacity: keyPressed[note] === false ? "0.5" : "1"}}
+            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: keyPressed[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={index}>
             </div>
         })

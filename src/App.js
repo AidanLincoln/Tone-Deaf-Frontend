@@ -154,12 +154,15 @@ export default class App extends React.Component {
               particles: { 
                 number: { 
                   value: 100, 
-                density: { 
-                  enable: true, 
-                  value_area: 1200, 
-                } 
+                  density: { 
+                    enable: true, 
+                    value_area: 1200, 
+                  }
+                }, 
+                // size: {
+                //   value: 3,
+                // }
               }, 
-            }, 
           }}/> 
           <header className="App-header">
             <Navbar user={this.state.auth.user} onSignOut={this.signOut}/>

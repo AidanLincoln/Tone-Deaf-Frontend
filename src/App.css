@@ -80,6 +80,12 @@ html {
 .row {
   height: 180px;
 }
+
+/* .col{
+  position: relative;
+  z-index: 1;
+} */
+
 .niceButton {
   display: inline-block;
   padding: 0.35em 1.2em;
@@ -133,6 +139,8 @@ html {
   border: 7px solid #ff5757;
   width: 650px;
   outline: 2px solid white;
+  position: relative;
+  z-index: 1;
 }
 
 .formLabel{
@@ -258,6 +266,8 @@ html {
 }
 .homeDescription{
   margin-top: 180px;
+  position: relative;
+  z-index: 1;
 }
 .pageTitle {
   position: relative;
