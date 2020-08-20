@@ -97,7 +97,7 @@ export default class ScaleDetails extends React.Component {
 
         assignedNotes.forEach((note, i) => {      
             setTimeout(() => {
-                polySynth.triggerAttackRelease(note, '0.5');
+                polySynth.triggerAttackRelease(note, '0.47');
             }, i * 510);
         })
     }
@@ -110,10 +110,10 @@ export default class ScaleDetails extends React.Component {
             scalesNotes.push(scalesNotes[0])
             let scaleKey = this.state.currentScale.scale_name.split(' ')[0]
             return <div>
-                <h1>{this.state.currentScale.scale_name}</h1>
+                <h1 className="scaleDetails">{this.state.currentScale.scale_name}</h1>
                 <br></br>
-                <h2>Notes:</h2>
-                <h3>{scalesNotes.toString()}</h3>
+                <h2 className="scaleDetails">Notes:</h2>
+                <h3 className="scaleDetails">{scalesNotes.toString()}</h3>
                 <br></br>
                 <button className="niceButton" onClick={this.playScale}>Play</button>
                 <br></br>

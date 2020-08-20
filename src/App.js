@@ -158,11 +158,8 @@ export default class App extends React.Component {
                     enable: true, 
                     value_area: 1200, 
                   }
-                }, 
-                // size: {
-                //   value: 3,
-                // }
-              }, 
+                }
+              }
           }}/> 
           <header className="App-header">
             <Navbar user={this.state.auth.user} onSignOut={this.signOut}/>

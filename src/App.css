@@ -282,6 +282,11 @@ html {
   z-index: 0;
 }
 
+.scaleDetails{
+  position: relative;
+  z-index: 2;
+}
+
 @media screen and (max-width: 1280px){
   .navbar .navLink {
     font-size: 1.5rem;
