@@ -109,7 +109,7 @@ export default class MyChords extends React.Component {
             <div>
                 <br></br>
                 <div>
-                    <h1>{`${this.props.user.user.username}'s Chords`}</h1>
+                    <h1 style={{position: "relative", zIndex: "1"}}>{`${this.props.user.user.username}'s Chords`}</h1>
                     <ul style={{ position: "relative", margin: "auto", top: "-20px"}}>{this.renderChords()}</ul>
                 </div>
             </div>

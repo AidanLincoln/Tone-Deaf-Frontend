@@ -6,7 +6,7 @@ export default class Navbar extends React.Component {
     render(){
         const link = {
           padding: '2px',
-          margin: '0 6px 6px',
+          margin: '0 10px 10px',
           color: 'black',
         }
     
@@ -82,7 +82,7 @@ export default class Navbar extends React.Component {
                 >Sign-In
                 </NavLink>:null}
 
-                {!localStorage.getItem('token') ?
+                {/* {!localStorage.getItem('token') ?
                 <NavLink
                 className="navLink"
                 to="/create-account"
@@ -92,7 +92,7 @@ export default class Navbar extends React.Component {
                     fontWeight: 'bolder'
                 }}
                 >Create Account
-                </NavLink>:null}
+                </NavLink>:null} */}
 
                 {/* Only render if user is logged in  */}
                 {!!localStorage.getItem('token') ? 

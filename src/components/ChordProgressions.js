@@ -128,28 +128,28 @@ export default class ChordProgressions extends React.Component {
                         <div className="col-2"></div>
                         <div className="col-2">
                             <button className="niceButton" 
-                                style={this.state.currentProgression === 1 ? {backgroundColor: "white", color: "black"} : null}
+                                style={this.state.currentProgression === 1 ? {backgroundColor: "white", color: "#c0392b", borderBottomColor: "#DCDCDC", borderRightColor: "#DCDCDC"} : null}
                                 onClick={() => this.handleProgressionChange(1)}>
                                 Progression 1
                             </button>
                         </div>
                         <div className="col-2">
                             <button className="niceButton" 
-                                style={this.state.currentProgression === 2 ? {backgroundColor: "white", color: "black"} : null}
+                                style={this.state.currentProgression === 2 ? {backgroundColor: "white", color: "#c0392b", borderBottomColor: "#DCDCDC", borderRightColor: "#DCDCDC"} : null}
                                 onClick={() => this.handleProgressionChange(2)}>
                                 Progression 2
                             </button>
                         </div>
                         <div className="col-2">
                             <button className="niceButton" 
-                                style={this.state.currentProgression === 3 ? {backgroundColor: "white", color: "black"} : null}
+                                style={this.state.currentProgression === 3 ? {backgroundColor: "white", color: "#c0392b", borderBottomColor: "#DCDCDC", borderRightColor: "#DCDCDC"} : null}
                                 onClick={() => this.handleProgressionChange(3)}>
                                 Progression 3
                             </button>
                         </div>
                         <div className="col-2">
                             <button className="niceButton" 
-                                style={this.state.currentProgression === 4 ? {backgroundColor: "white", color: "black"} : null}
+                                style={this.state.currentProgression === 4 ? {backgroundColor: "white", color: "#c0392b", borderBottomColor: "#DCDCDC", borderRightColor: "#DCDCDC"} : null}
                                 onClick={() => this.handleProgressionChange(4)}>
                                 Progression 4
                             </button>
