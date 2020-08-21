@@ -103,10 +103,14 @@ html {
   font-family: 'Montserrat', sans-serif;
   position: relative;
   z-index: 1;
+  border-right: 2px solid #c0392b;
+  border-bottom: 2px solid #c0392b;
 }
 .niceButton:hover{
-  color:#000000;
-  background-color: #FFFFFF;
+  color: #c0392b;
+  background-color: white;
+  border-bottom-color: #DCDCDC;
+  border-right-color: #DCDCDC;
 }
 .myChords{
   background-color: #ff5757;

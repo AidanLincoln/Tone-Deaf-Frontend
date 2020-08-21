@@ -129,7 +129,7 @@ export default class ScaleDetails extends React.Component {
     render(){
         return(
             <div>  
-                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px"}} onClick={this.returnToLastPage}>Go back</button>  
+                <button className="niceButton" style={{position: "absolute", left: "20px", top: "120px", zIndex: "3"}} onClick={this.returnToLastPage}>Go back</button>  
                 <br></br>      
                 {this.renderScale()}
             </div>
