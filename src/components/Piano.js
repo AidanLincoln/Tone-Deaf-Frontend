@@ -95,10 +95,10 @@ export default class Piano extends React.Component {
                         </div>
                     </div> : 
                     <div>
-                        <div className="row" style={{paddingLeft: "240px", paddingRight: "240px", marginTop: "40px"}}>
+                        <div className="row" style={{paddingLeft: "280px", paddingRight: "280px", marginTop: "40px"}}>
                             {this.mapScaleToKeys()}
                         </div>
-                        <div className="row" style={{paddingLeft: "240px", paddingRight: "240px"}}>
+                        <div className="row" style={{paddingLeft: "280px", paddingRight: "280px"}}>
                             {this.mapActiveKeys(this.props.octaveOne)}
                         </div>            
                     </div>}   
