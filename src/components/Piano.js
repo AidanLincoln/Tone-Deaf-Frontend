@@ -39,7 +39,7 @@ export default class Piano extends React.Component {
         }   
         return this.orderKeys().map((note, index) => {
             return <div className="col-1"
-                style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white"}}
+                style={{border: "3px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white", background: colorObj[note] === "black" ? "linear-gradient(to bottom, black 65%, white 35%" : "linear-gradient(to bottom, white 50%, white 50%"}}
                 key={index}>{note}
             </div>
         })
@@ -65,7 +65,7 @@ export default class Piano extends React.Component {
         })
         return this.orderKeys().map((note, index) => {
             return <div className="col-1"
-            style={{border: "5px solid #ff5757", padding: '20px', backgroundColor: keyPressed[note] === false ? "#FFAD6D" : "#ffde59"}}
+            style={{border: "3px solid #ff5757", padding: '20px', backgroundColor: keyPressed[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={index}>
             </div>
         })
@@ -95,10 +95,10 @@ export default class Piano extends React.Component {
                         </div>
                     </div> : 
                     <div>
-                        <div className="row" style={{paddingLeft: "180px", paddingRight: "180px", marginTop: "40px"}}>
+                        <div className="row" style={{paddingLeft: "240px", paddingRight: "240px", marginTop: "40px"}}>
                             {this.mapScaleToKeys()}
                         </div>
-                        <div className="row" style={{paddingLeft: "180px", paddingRight: "180px"}}>
+                        <div className="row" style={{paddingLeft: "240px", paddingRight: "240px"}}>
                             {this.mapActiveKeys(this.props.octaveOne)}
                         </div>            
                     </div>}   

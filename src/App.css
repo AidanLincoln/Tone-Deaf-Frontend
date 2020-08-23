@@ -102,8 +102,8 @@ html {
   font-family: 'Montserrat', sans-serif;
   position: relative;
   z-index: 1;
-  border-right: 2px solid #c0392b;
-  border-bottom: 2px solid #c0392b;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
 }
 .niceButton:hover{
   color: #c0392b;
@@ -167,8 +167,8 @@ html {
   border-radius: 0;
   background-color: #ff5757;
   border: 2px solid white;
-  border-right: 2px solid #c0392b;
-  border-bottom: 2px solid #c0392b;
+  /* border-right: 2px solid #c0392b;
+  border-bottom: 2px solid #c0392b; */
   color: white;
   /* Adding transition effect */
   transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
@@ -394,12 +394,18 @@ html {
   .navbar .navLink {
     font-size: 1.8rem;
   }
+  .row{
+    height: 200px
+  }
 }
 @media screen and (min-width: 1680px){
   .navLogo{
     position: 'absolute';
     margin-left: -190px;
     margin-top: -5px;
+  }
+  .row{
+    height: 220px
   }
 }
 @media screen and (min-width: 1920px){
@@ -425,5 +431,8 @@ html {
   }
   .navbar .navLink {
     font-size: 1.9rem;
+  }
+  .row{
+    height: 240px
   }
 }
