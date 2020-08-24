@@ -81,7 +81,7 @@ export default class ChordCreator extends React.Component {
         }   
         return this.orderKeys().map((note, index) => {
             let octave = 1
-            return <div className="col-1" onClick={() => this.playNote(note, octave)}
+            return <div className="pianoKey col-1" onClick={() => this.playNote(note, octave)}
                 style={{border: "3px solid #ff5757", padding: '20px', backgroundColor: colorObj[note], color: colorObj[note] === "white" ? "black" : "white", background: colorObj[note] === "black" ? "linear-gradient(to bottom, black 65%, white 35%" : "linear-gradient(to bottom, white 50%, white 50%"}}
                 key={index}>{note}
             </div>
@@ -106,7 +106,7 @@ export default class ChordCreator extends React.Component {
         return this.orderKeys().map((note, index) => {
             let octave = 2
             let noteOc = `${note}2`
-            return <div className="col-1" onClick={() => this.playNote(note, octave)}
+            return <div className="pianoKey col-1" onClick={() => this.playNote(note, octave)}
                 style={{border: "3px solid #ff5757", padding: '20px', color: colorObj[noteOc] === "white" ? "black" : "white", background: colorObj[noteOc] === "black" ? "linear-gradient(to bottom, black 65%, white 35%" : "linear-gradient(to bottom, white 50%, white 50%"}}
                 key={note}>{note}
             </div>
@@ -117,7 +117,7 @@ export default class ChordCreator extends React.Component {
         const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
         return notes.map((note, index) => {
-            return <div className="col-1" onClick={() => this.noteToggle(note)}
+            return <div className="pianoKey col-1" onClick={() => this.noteToggle(note)}
             style={{border: "3px solid #ff5757", padding: '20px', backgroundColor: this.state.activeKeys[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={note}>
             </div>
@@ -128,7 +128,7 @@ export default class ChordCreator extends React.Component {
         const notes = ["C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2"]
 
         return notes.map((note, index) => {
-            return <div className="col-1" onClick={() => this.noteToggle(note)}
+            return <div className="pianoKey col-1" onClick={() => this.noteToggle(note)}
             style={{border: "3px solid #ff5757", padding: '20px', backgroundColor: this.state.activeKeys[note] === false ? "#FFAD6D" : "#ffde59"}}
             key={note}>
             </div>

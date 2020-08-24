@@ -290,6 +290,27 @@ html {
   z-index: 2;
 }
 
+.pianoKey:hover{
+  position: relative;
+  z-index: 2;
+  box-shadow:0 0 10px white;
+}
+
+/* .glow{
+  width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 50px #fff,      
+        inset 20px 0 80px #f0f,   
+        inset -20px 0 80px #0ff,  
+        inset 20px 0 300px #f0f, 
+        inset -20px 0 300px #0ff,
+        0 0 50px #fff,           
+        -10px 0 80px #f0f,        
+        10px 0 80px #0ff;         
+} */
+
 @media screen and (max-width: 1280px){
   .navbar .navLink {
     font-size: 1.5rem;
