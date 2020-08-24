@@ -293,7 +293,7 @@ html {
 .pianoKey:hover{
   position: relative;
   z-index: 2;
-  box-shadow:0 0 10px white;
+  box-shadow:0 0 10px black;
 }
 
 /* .glow{
