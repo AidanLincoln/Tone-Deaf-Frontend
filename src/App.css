@@ -102,8 +102,6 @@ html {
   font-family: 'Montserrat', sans-serif;
   position: relative;
   z-index: 1;
-  border-right: 2px solid white;
-  border-bottom: 2px solid white;
 }
 .niceButton:hover{
   color: #c0392b;
@@ -459,5 +457,12 @@ transform: translate(-50%, -50%);
   }
   .row{
     height: 240px
+  }
+  @media screen and (min-width: 2560px){
+    .navLogo{
+      position: 'absolute';
+      margin-left: -400px;
+      margin-top: -18px;
+    }
   }
 }

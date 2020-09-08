@@ -1,5 +1,5 @@
 import React from 'react'
-import { PolySynth, Synth } from 'tone'
+import { Tone, PolySynth, Synth } from 'tone'
 import { api } from '../services/api'
 
 const polySynth = new PolySynth({
@@ -203,6 +203,10 @@ export default class ChordCreator extends React.Component {
         })
     }
 
+    stopChord = () => {
+        
+    }
+
     handleSave = () => {
         let activeKeys = Object.keys(this.state.activeKeys)
         let chord = {
@@ -259,6 +263,7 @@ export default class ChordCreator extends React.Component {
                     <button className={"niceButton"} onClick={this.onPlayChord}>Play</button>
         {!!this.props.user.id ? <button className={"niceButton"} onClick={this.handleSave}>{!!this.state.hasBeenSaved ? "Saved" : "Save"}</button> : null}
                     <button className={"niceButton"} onClick={this.onResetPiano}>Reset Piano</button>
+                    <button className="niceButton" onClick={this.stopChord}>Stop</button>
                 </div>
                 <div className="container-fluid">       
                     <div className="row" style={{padding: "40px", paddingLeft:"60px", paddingRight:"60px"}}>
